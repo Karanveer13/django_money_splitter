@@ -16,9 +16,8 @@ Including another URLconf
 
 from django.urls import path, re_path, include
 from tastypie.api import Api
-from splitter.api import User_Resource
-from splitter.api import User_Resource
-#from splitter.api import User_Resource, Group_Resource, Friend_Resource, Expense_Resource, Expense_Total_Resource
+#from splitter.api import User_Resource
+from splitter.api import User_Resource, Group_Resource, Friend_Resource, Expense_Resource, Expense_Total_Resource
 from splitter.authentication import New_Resource
 from . import views
 
@@ -32,10 +31,10 @@ from . import views
 
 new_resource = New_Resource()
 user_resource = User_Resource()
-# group_resource = Group_Resource()
-# friend_resource = Friend_Resource()
-# expense_resource = Expense_Resource()
-# expense_total_resource = Expense_Total_Resource()
+group_resource = Group_Resource()
+friend_resource = Friend_Resource()
+expense_resource = Expense_Resource()
+expense_total_resource = Expense_Total_Resource()
 #debt_resource = Debt_Resource()
 
 urlpatterns = [
@@ -47,10 +46,10 @@ urlpatterns = [
     # path('activate/<uidb64>/<token>', views.activate, name="activate"),
     path('', include(new_resource.urls)),
     path('', include(user_resource.urls)),
-    # path('', include(group_resource.urls)),
-    # path('', include(friend_resource.urls)),
-    # path('', include(expense_resource.urls)),
-    # path('', include(expense_total_resource.urls)),
+    path('', include(group_resource.urls)),
+    path('', include(friend_resource.urls)),
+    path('', include(expense_resource.urls)),
+    path('', include(expense_total_resource.urls)),
     #path('', include(debt_resource.urls)),
 ]
 

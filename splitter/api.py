@@ -18,23 +18,26 @@ class User_Resource(ModelResource):
         authentication = ApiKeyAuthentication()
         authorization = DjangoAuthorization()
         filtering = {
-            "username":('exact', 'startswith')
+            "username":('exact', 'startswith');
         }
 
-# class Group_Resource(ModelResource):
-#     creator = fields.ForeignKey(User_Resource, attribute = 'creator', null = True, full = True)
-#     friends = fields.ToManyField(User_Resource, attribute = 'friends', null = True, full = True)
-#
-#     class Meta:
-#         queryset = Group.objects.all()
-#         resource_name = 'group'
-#         authentication = ApiKeyAuthentication()
-#         #authorization = Group_Authorization()
-#         #always_return_data = True
-#         filtering = {
-#             'creator': ALL_WITH_RELATIONS,
-#             'friends': ALL_WITH_RELATIONS,
-#         }
+class Group_Resource(ModelResource):
+    creater = fields.ForeignKey(User_Resource, attribute = 'creater', null = True, full = True)
+    friends = fields.ToManyField(User_Resource, attribute = 'friends', null = True, full = True)
+
+    class Meta:
+        queryset = Group.objects.all()
+        resource_name = 'group'
+        allowed_methods = ['get', 'post']
+        authentication = ApiKeyAuthentication()
+        #authorization = DjangoAuthorization()
+        authorization = Group_Authorization()
+        always_return_data = True
+        # filtering = {
+        #     'creator': ALL_WITH_RELATIONS,
+        #     'friends': ALL_WITH_RELATIONS,
+        # }
+
     # def obj_create(self, bundle, **kwargs):
     #     bundle = self.full_hydrate(bundle)
     #     return super(Group_Resource, self).obj_create(bundle, creator=bundle.request.user)
@@ -45,25 +48,47 @@ class User_Resource(ModelResource):
         #pass
 
 
-# class Friend_Resource(ModelResource):
-#     group = fields.ForeignKey(Group_Resource, attribute='group', null=True, full=True)
-#     friend = fields.ToManyField(User_Resource, attribute='friend', null=True, full=True)
-#
-#     class Meta:
-#         queryset = Friend.objects.all()
-#         resource_name = 'friend'
-#         allowed_methods = ['get']
-#         authentication = ApiKeyAuthentication()
-#         authorization = Friend_Authorization()
+class Friend_Resource(ModelResource):
+    group = fields.ForeignKey(Group_Resource, attribute='group', null=True, full=True)
+    friend = fields.ToManyField(User_Resource, attribute='friend', null=True, full=True)
+
+    class Meta:
+        queryset = Friend.objects.all()
+        resource_name = 'friend'
+        allowed_methods = ['get', 'post']
+        authentication = ApiKeyAuthentication()
+        authorization = DjangoAuthorization()
+        #authorization = Friend_Authorization()
 #     #pass
 #
 #
-# class Expense_Resource(ModelResource):
-#     pass
-#
-#
-# class Expense_Total_Resource(ModelResource):
-#     pass
+class Expense_Resource(ModelResource):
+    group = fields.ForeignKey(Group_Resource, attribute='group', null=True, full=True)
+    payer = fields.ForeignKey(User_Resource, attribute='payer', null=True, full=True)
+    splitters = fields.ToManyField(User_Resource, attribute='splitters', null=True, full=True)
+
+    class Meta:
+        queryset = Expense.objects.all()
+        resource_name = 'expense'
+        allowed_methods = ['get', 'post']
+        authentication = ApiKeyAuthentication()
+        authorization = DjangoAuthorization()
+        #authorization = Expense_Authorization()
+    #pass
+
+
+class Expense_Total_Resource(ModelResource):
+    sender = fields.ForeignKey(User_Resource, attribute='sender', null=True, full=True)
+    receiver = fields.ForeignKey(User, attribute='reciever', null=True, full=True)
+
+    class Meta:
+        queryset = Expense_Total.objects.all()
+        resource_name = 'expense_total'
+        allowed_methods = ['get', 'post']
+        authentication = ApiKeyAuthentication()
+        authorization = DjangoAuthorization()
+        # authorization = Expense_Total_Authorization()
+    #pass
 
 
 # class Debt_Resource(ModelResource):
