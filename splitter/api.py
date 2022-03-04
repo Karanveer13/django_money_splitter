@@ -28,10 +28,10 @@ class Group_Resource(ModelResource):
     class Meta:
         queryset = Group.objects.all()
         resource_name = 'group'
-        allowed_methods = ['get', 'post']
+        allowed_methods = ['get', 'post', 'put']
         authentication = ApiKeyAuthentication()
-        authorization = Authorization()
-        #authorization = Group_Authorization()
+        #authorization = Authorization()
+        authorization = Group_Authorization()
         always_return_data = True
         filtering = {
             'creater': ALL_WITH_RELATIONS,
