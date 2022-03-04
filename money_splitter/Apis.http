@@ -1,0 +1,11 @@
+1 User api -  http://0.0.0.0:8000/user/id_of_user/
+Authorization ApiKey username:key
+
+2 Group api
+GET http://0.0.0.0:8000/group/?creater=username
+Authorization ApiKey creater:key
+
+POST http://0.0.0.0:8000/group/?creater=username
+Authorization ApiKey creater:key
+
+3

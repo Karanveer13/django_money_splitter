@@ -44,8 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tastypie',
     'splitter',
+    'tastypie',
     #'allauth',
 ]
 
@@ -59,10 +59,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:5500',
-    'http://127.0.0.1:5500'
-]
+# CORS_ORIGIN_WHITELIST = [
+#     'http://localhost:5500',
+#     'http://127.0.0.1:5500'
+# ]
 
 
 ROOT_URLCONF = 'money_splitter.urls'

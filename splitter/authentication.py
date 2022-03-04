@@ -13,7 +13,7 @@ class New_Resource(ModelResource):
     class Meta:
         queryset = User.objects.all()
         resource_name = 'new'
-        excludes = ['email', 'password', 'is_active', 'is_staff', 'is_superuser']
+        excludes = ['email', 'is_active', 'is_staff', 'is_superuser']
         allowed_methods = ['post']
         authorization = Authorization()
 
@@ -25,12 +25,17 @@ class New_Resource(ModelResource):
         ]
 
     def signup(self, request, **kwargs):
-        self.method_check(request, allowed=['post'])
+        self.method_check(request, allowed=['get','post'])
+
         data = self.deserialize(request, request.body)
+
         username = data.get('username')
         password = data.get('password')
-        if username is None or password is None:
-            raise BadRequest('Please enter a value.')
+
+        if username is None:
+            raise BadRequest('Enter the username')
+        if password is None:
+            raise BadRequest('Enter the password')
 
         try:
             user = User.objects.create_user(username, '', password)
@@ -45,7 +50,7 @@ class New_Resource(ModelResource):
             raise BadRequest('That username already exists')
 
     def signin(self, request, **kwargs):
-        self.method_check(request, allowed=['post'])
+        self.method_check(request, allowed=['get','post'])
         data = self.deserialize(request, request.body)
         username = data.get('username')
         password = data.get('password')
@@ -62,6 +67,7 @@ class New_Resource(ModelResource):
                 if not api_key.key:
                     api_key.save()
             except ApiKey.DoesNotExist:
+                #raise BadRequest('Please enter correct details.')
                 api_key = ApiKey.objects.create(user=user)
 
             return self.create_response(request, {
@@ -70,8 +76,7 @@ class New_Resource(ModelResource):
                 'token': api_key.key
             })
         else:
-            raise BadRequest("Incorrect username or password.")
-
+            raise BadRequest("Please enter correct details.")
     def signout(self, request, **kwargs):
         self.method_check(request, allowed=['get'])
         if request.user and request.user.authenticated():

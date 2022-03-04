@@ -1,0 +1,72 @@
+1 User api -  http://0.0.0.0:8000/user/id_of_user/
+Authorization ApiKey username:key
+
+2 Group api
+GET http://0.0.0.0:8000/group/schema
+Authorization ApiKey creater:key
+
+GET http://0.0.0.0:8000/group/      (To retrieve all the data stored in Group Model)
+Authorization ApiKey username:key
+
+
+GET http://0.0.0.0:8000/group/?creater=username
+Authorization ApiKey creater:key
+
+POST http://0.0.0.0:8000/group/?creater=username
+Authorization ApiKey creater:key
+
+3 Friend api
+
+4 Expense api
+GET http://0.0.0.0:8000/expense/schema
+Authorization ApiKey username:key
+
+GET http://0.0.0.0:8000/expense/      (To retrieve all the data stored in Expense Model)
+Authorization ApiKey username:key
+
+GET http://0.0.0.0:8000/expense/
+Authorization ApiKey username:key
+Body -> Raw -> JSON
+{
+            "amount": value,
+            "created_at": "2022-03-03T11:23:17.161134",
+            "group": {
+                "creater": {
+                    "resource_uri": "/user/user_id/",
+                    "username": "name"
+                },
+                "friends": [
+                    {
+                        "resource_uri": "/user/user_id/",
+                        "username": "name"
+                    },
+                ],
+                "id": group_id,
+                "name": "group_name",
+                "resource_uri": "/group/group_id/"
+            },
+            "id": expense_id,
+            "payer": {
+                "resource_uri": "/user/user_id/",
+                "username": "name"
+            },
+            "reason": "expense_name",
+            "resource_uri": "/expense/expense_id/",
+            "splitters": [
+                {
+                    "resource_uri": "/user/6/",
+                    "username": "Anuj@1"
+                },
+                {
+                    "resource_uri": "/user/7/",
+                    "username": "Anubhav@1"
+                },
+                {
+                    "resource_uri": "/user/9/",
+                    "username": "Anshu@1"
+                }
+            ]
+        }
+
+
+

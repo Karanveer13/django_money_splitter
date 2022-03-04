@@ -12,7 +12,7 @@ class Group_Authorization(Authorization):
             return False
 
     def update_list(self, object_list, bundle):
-        return object_list.filter(Q(creater=bundle.request.user) | Q(friends=bundle.request.user.id))
+        return object_list.filter(Q(creater=bundle.request.user) | Q(friends__id=bundle.request.user.id))
 
     def update_detail(self, object_list, bundle):
         if object_list.filter(Q(creater=bundle.request.user) | Q(friends__id=bundle.request.user.id)):
@@ -30,8 +30,8 @@ class Group_Authorization(Authorization):
             return False
     #pass
 
-#http://0.0.0.0:8000/group/schema/?format=json
 class Friend_Authorization(Authorization):
+
     pass
 
 
