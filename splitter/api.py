@@ -180,7 +180,7 @@ class Expense_Resource(ModelResource):
 
 class Expense_Total_Resource(ModelResource):
     sender = fields.ForeignKey(User_Resource, attribute='sender', null=True)
-    receiver = fields.ForeignKey(User_Resource, attribute='reciever', null=True)
+    receiver = fields.ForeignKey(User_Resource, attribute='receiver', null=True)
 
     class Meta:
         queryset = Expense_Total.objects.all()
@@ -201,11 +201,10 @@ class Settle_Resource(ModelResource):
     expense = fields.ForeignKey(Expense_Resource, attribute='expense', null=True)
     sender = fields.ForeignKey(User_Resource, attribute='sender', null=True)
     receiver = fields.ForeignKey(User_Resource, attribute='receiver', null=True)
-    amount = fields.IntegerField()
 
     class Meta:
         queryset = Settle.objects.all()
-        resource_name = 'settle_payment'
+        resource_name = 'settle'
         allowed_methods = ['get', 'post', 'put','delete']
         authentication = ApiKeyAuthentication()
         authorization = Authorization()
