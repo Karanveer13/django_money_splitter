@@ -44,6 +44,7 @@ class New_Resource(ModelResource):
             return self.create_response(request, {
                 'success': True,
                 'username': username,
+                #'id': user.id,
                 'token': api_key.key
             })
         except IntegrityError:

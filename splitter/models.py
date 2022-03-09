@@ -9,12 +9,12 @@ models.signals.post_save.connect(create_api_key, sender=User)
 class Group(models.Model):
     creater = models.ForeignKey(User,on_delete=models.CASCADE,related_name="Creater")
     name = models.CharField(max_length=250)
-    friends = models.ManyToManyField(User)
+    group_friends = models.ManyToManyField(User)
     #friends = models.ManyToManyField(User, through="Friend")
     def __str__(self):
         return self.name
 
-class Friend(models.Model):
+class Group_Friend(models.Model):
     group = models.ForeignKey(Group, on_delete = models.CASCADE, related_name = "Group_name")
     friend = models.ForeignKey(User, on_delete=models.CASCADE, related_name="Group_Friend")
 
@@ -30,7 +30,7 @@ class Expense(models.Model):
     reason = models.CharField(max_length = 250)
     created_at = models.DateTimeField(auto_now=True)
     payer = models.ForeignKey(User, on_delete = models.CASCADE, related_name = 'expense_payer')
-    splitters = models.ManyToManyField(User, related_name = "friends")
+    splitters = models.ManyToManyField(User, related_name = "friends") #remove User to Friend
     def __str__(self):
         return self.reason + ' in group ' + self.group.name
 
@@ -44,15 +44,15 @@ class Expense_Total(models.Model):
 
 
 
-# class debt(models.Model):
-#     group = models.ForeignKey(Group,on_delete = models.CASCADE, related_name = 'group_debts')
-#     expense = models.ForeignKey(, on_delete = models.CASCADE, related_name = 'expense_debt')
-#     sender = models.ForeignKey(User, on_delete = models.CASCADE, related_name = 'expense_sender')
-#     receiver = models.ForeignKey(User, on_delete= models.CASCADE, related_name = 'expense_receiver')
-#     amount = models.IntegerField()
-#
-#     def __str__(self):
-#         return self.sender.username + ' pay to ' + self.receiver.username + ' in room ' + self.group.name
+class Settle(models.Model):
+    group = models.ForeignKey(Group,on_delete = models.CASCADE, related_name = 'group_debts')
+    expense = models.ForeignKey(Expense, on_delete = models.CASCADE, related_name = 'expense_debt')
+    sender = models.ForeignKey(User, on_delete = models.CASCADE, related_name = 'expense_sender')
+    receiver = models.ForeignKey(User, on_delete= models.CASCADE, related_name = 'expense_receiver')
+    amount = models.IntegerField()
+
+    def __str__(self):
+        return self.sender.username + ' pay to ' + self.receiver.username + ' in group ' + self.group.name
 
 
 
