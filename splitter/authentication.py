@@ -39,45 +39,48 @@ class New_Resource(ModelResource):
 
         try:
             user = User.objects.create_user(username, '', password)
-            # Getting the API key
             api_key = ApiKey.objects.get(user=user.id)
-            return self.create_response(request, {
-                'success': True,
-                'username': username,
-                #'id': user.id,
-                'token': api_key.key
+            return self.create_response(
+                request, {
+                    'success': True,
+                    'username': username,
+                    #'id': user.id,
+                    'token': api_key.key
             })
         except IntegrityError:
-            raise BadRequest('That username already exists')
+            raise BadRequest('Username already Exists')
 
     def signin(self, request, **kwargs):
         self.method_check(request, allowed=['get','post'])
         data = self.deserialize(request, request.body)
         username = data.get('username')
         password = data.get('password')
-        if username is None or password is None:
-            raise BadRequest('Please enter a value.')
 
-        # Check if the user exists
+        if username is None:
+            raise BadRequest('Enter the username')
+        if password is None:
+            raise BadRequest('Enter the password')
+
         user = authenticate(username=username, password=password)
         if user:
             login(request, user)
-            # Getting the API key,create if doesn't exist
+
             try:
                 api_key = ApiKey.objects.get(user=user)
                 if not api_key.key:
                     api_key.save()
             except ApiKey.DoesNotExist:
-                #raise BadRequest('Please enter correct details.')
                 api_key = ApiKey.objects.create(user=user)
 
-            return self.create_response(request, {
-                'success': True,
-                'username': username,
-                'token': api_key.key
+            return self.create_response(
+                request, {
+                    'success': True,
+                    'username': username,
+                    'token': api_key.key
             })
         else:
             raise BadRequest("Please enter correct details.")
+
     def signout(self, request, **kwargs):
         self.method_check(request, allowed=['get'])
         if request.user and request.user.authenticated():
