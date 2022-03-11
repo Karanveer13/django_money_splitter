@@ -144,17 +144,12 @@ class Group_Friend_Resource(ModelResource):
         resource_name = 'friend'
         allowed_methods = ['get', 'post', 'put','delete']
         authentication = ApiKeyAuthentication()
-        authorization = Authorization()
-        #authorization = Friend_Authorization()
+        #authorization = Authorization()
+        authorization = Group_Friend_Authorization()
         filtering = {
             'group': ALL_WITH_RELATIONS,
             'friend': ALL_WITH_RELATIONS,
         }
-
-    #     def obj_create(self, bundle, **kwargs):
-    #         bundle = self.full_hydrate(bundle)
-    #         return super(Friend_Resource, self).obj_create(bundle, group=bundle.request.user)
-    # #pass
 
 
 class Expense_Resource(ModelResource):
@@ -168,8 +163,8 @@ class Expense_Resource(ModelResource):
         allowed_methods = ['get', 'post', 'put','delete']
         excludes = ['created_at']
         authentication = ApiKeyAuthentication()
-        authorization = Authorization()
-        #authorization = Expense_Authorization()
+        #authorization = Authorization()
+        authorization = Expense_Authorization()
         filtering = {
             'group': ALL_WITH_RELATIONS,
             'payer': ALL_WITH_RELATIONS,
@@ -187,8 +182,8 @@ class Expense_Total_Resource(ModelResource):
         resource_name = 'expense_total'
         allowed_methods = ['get', 'post', 'put','delete']
         authentication = ApiKeyAuthentication()
-        authorization = Authorization()
-        # authorization = Expense_Total_Authorization()
+        #authorization = Authorization()
+        authorization = Expense_Total_Authorization()
         filtering = {
             'sender': ALL_WITH_RELATIONS,
             'receiver': ALL_WITH_RELATIONS,

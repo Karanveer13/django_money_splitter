@@ -5,14 +5,14 @@ from tastypie.models import create_api_key
 
 models.signals.post_save.connect(create_api_key, sender=User)
 
-
 class Group(models.Model):
-    creater = models.ForeignKey(User,on_delete=models.CASCADE,related_name="Creater")
+    creater = models.ForeignKey(User, on_delete=models.CASCADE, related_name="Creater")
     name = models.CharField(max_length=250)
     group_friends = models.ManyToManyField(User)
     #friends = models.ManyToManyField(User, through="Friend")
     def __str__(self):
         return self.name
+
 
 class Group_Friend(models.Model):
     group = models.ForeignKey(Group, on_delete = models.CASCADE, related_name = "Group_name")
@@ -23,6 +23,7 @@ class Group_Friend(models.Model):
 
     class Meta:
         unique_together = ('group','friend')
+
 
 class Expense(models.Model):
     group = models.ForeignKey(Group, on_delete = models.CASCADE, related_name = 'friend_expense')
