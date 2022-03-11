@@ -28,7 +28,7 @@ class Group_Authorization(Authorization):
         return object_list.filter(Q(creater=bundle.request.user) | Q(group_friends__id=bundle.request.user.id)).distinct()
 
     def delete_detail(self, object_list, bundle):
-        if object_list.filter(Q(creater=bundle.request.user) | Q(group_friends__id=bundle.request.user.id)):.distinct()
+        if object_list.filter(Q(creater=bundle.request.user) | Q(group_friends__id=bundle.request.user.id)).distinct()
             return True
         else:
             return False
