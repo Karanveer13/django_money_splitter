@@ -10,7 +10,7 @@ class Group_Authorization(Authorization):
         return object_list.filter(Q(creater=bundle.request.user) | Q(group_friends__id=bundle.request.user.id)).distinct()
 
     def read_detail(self, object_list, bundle):
-        if object_list.filter(Q(creater=bundle.request.user) | Q(group_friends__id=bundle.request.user.id)):
+        if object_list.filter(Q(creater=bundle.request.user) | Q(group_friends__id=bundle.request.user.id)).distinct():
             return True
         else:
             return False
@@ -19,7 +19,7 @@ class Group_Authorization(Authorization):
         return object_list.filter(Q(creater=bundle.request.user) | Q(group_friends__id=bundle.request.user.id)).distinct()
 
     def update_detail(self, object_list, bundle):
-        if object_list.filter(Q(creater=bundle.request.user) | Q(group_friends__id=bundle.request.user.id)):
+        if object_list.filter(Q(creater=bundle.request.user) | Q(group_friends__id=bundle.request.user.id)).distinct():
             return True
         else:
             return False
@@ -28,7 +28,7 @@ class Group_Authorization(Authorization):
         return object_list.filter(Q(creater=bundle.request.user) | Q(group_friends__id=bundle.request.user.id)).distinct()
 
     def delete_detail(self, object_list, bundle):
-        if object_list.filter(Q(creater=bundle.request.user) | Q(group_friends__id=bundle.request.user.id)):
+        if object_list.filter(Q(creater=bundle.request.user) | Q(group_friends__id=bundle.request.user.id)):.distinct()
             return True
         else:
             return False
@@ -39,7 +39,7 @@ class Group_Friend_Authorization(Authorization):
         return object_list.filter(Q(group__creater__id=bundle.request.user.id) | Q(friend__id=bundle.request.user.id)).distinct()
 
     def read_detail(self, object_list, bundle):
-        if object_list.filter(Q(group__creater__id=bundle.request.user.id) | Q(friend__id=bundle.request.user.id)):
+        if object_list.filter(Q(group__creater__id=bundle.request.user.id) | Q(friend__id=bundle.request.user.id)).distinct():
             return True
         else:
             return False
@@ -48,7 +48,7 @@ class Group_Friend_Authorization(Authorization):
         return object_list.filter(Q(group__creater__id=bundle.request.user.id) | Q(friend__id=bundle.request.user.id)).distinct()
 
     def update_detail(self, object_list, bundle):
-        if object_list.filter(Q(group__creater__id=bundle.request.user.id) | Q(friend__id=bundle.request.user.id)):
+        if object_list.filter(Q(group__creater__id=bundle.request.user.id) | Q(friend__id=bundle.request.user.id)).distinct():
             return True
         else:
             return False
@@ -57,7 +57,7 @@ class Group_Friend_Authorization(Authorization):
         return object_list.filter(Q(group__creater__id=bundle.request.user.id) | Q(friend__id=bundle.request.user.id)).distinct()
 
     def delete_detail(self, object_list, bundle):
-        if object_list.filter(Q(group__creater__id=bundle.request.user.id) | Q(friend__id=bundle.request.user.id)):
+        if object_list.filter(Q(group__creater__id=bundle.request.user.id) | Q(friend__id=bundle.request.user.id)):.distinct()
             return True
         else:
             return False
@@ -70,7 +70,7 @@ class Expense_Authorization(Authorization):
         return object_list.filter(Q(group__creater__id=bundle.request.user.id) | Q(payer__id=bundle.request.user.id) | Q(splitters__id=bundle.request.user.id)).distinct()
 
     def read_detail(self, object_list, bundle):
-        if object_list.filter(Q(group__creater__id=bundle.request.user.id) | Q(payer__id=bundle.request.user.id) | Q(splitters__id=bundle.request.user.id)):
+        if object_list.filter(Q(group__creater__id=bundle.request.user.id) | Q(payer__id=bundle.request.user.id) | Q(splitters__id=bundle.request.user.id)).distinct():
             return True
         else:
             return False
@@ -79,7 +79,7 @@ class Expense_Authorization(Authorization):
         return object_list.filter(Q(group__creater__id=bundle.request.user.id) | Q(payer__id=bundle.request.user.id) | Q(splitters__id=bundle.request.user.id)).distinct()
 
     def update_detail(self, object_list, bundle):
-        if object_list.filter(Q(group__creater__id=bundle.request.user.id) | Q(payer__id=bundle.request.user.id) | Q(splitters__id=bundle.request.user.id)):
+        if object_list.filter(Q(group__creater__id=bundle.request.user.id) | Q(payer__id=bundle.request.user.id) | Q(splitters__id=bundle.request.user.id)).distinct():
             return True
         else:
             return False
@@ -88,7 +88,7 @@ class Expense_Authorization(Authorization):
         return object_list.filter(Q(group__creater__id=bundle.request.user.id) | Q(payer__id=bundle.request.user.id) | Q(splitters__id=bundle.request.user.id)).distinct()
 
     def delete_detail(self, object_list, bundle):
-        if object_list.filter(Q(group__creater__id=bundle.request.user.id) | Q(payer__id=bundle.request.user.id) | Q(splitters__id=bundle.request.user.id)):
+        if object_list.filter(Q(group__creater__id=bundle.request.user.id) | Q(payer__id=bundle.request.user.id) | Q(splitters__id=bundle.request.user.id)).distinct():
             return True
         else:
             return False
@@ -100,7 +100,7 @@ class Expense_Total_Authorization(Authorization):
         return object_list.filter(Q(sender__id=bundle.request.user.id) | Q(receiver__id=bundle.request.user.id)).distinct()
 
     def read_detail(self, object_list, bundle):
-        if object_list.filter(Q(sender__id=bundle.request.user.id) | Q(receiver__id=bundle.request.user.id)):
+        if object_list.filter(Q(sender__id=bundle.request.user.id) | Q(receiver__id=bundle.request.user.id)).distinct():
             return True
         else:
             return False
@@ -109,7 +109,7 @@ class Expense_Total_Authorization(Authorization):
         return object_list.filter(Q(sender__id=bundle.request.user.id) | Q(receiver__id=bundle.request.user.id)).distinct()
 
     def update_detail(self, object_list, bundle):
-        if object_list.filter(Q(sender__id=bundle.request.user.id) | Q(receiver__id=bundle.request.user.id)):
+        if object_list.filter(Q(sender__id=bundle.request.user.id) | Q(receiver__id=bundle.request.user.id)).distinct():
             return True
         else:
             return False
@@ -118,7 +118,7 @@ class Expense_Total_Authorization(Authorization):
         return object_list.filter(Q(sender__id=bundle.request.user.id) | Q(receiver__id=bundle.request.user.id)).distinct()
 
     def delete_detail(self, object_list, bundle):
-        if object_list.filter(Q(sender__id=bundle.request.user.id) | Q(receiver__id=bundle.request.user.id)):
+        if object_list.filter(Q(sender__id=bundle.request.user.id) | Q(receiver__id=bundle.request.user.id)).distinct():
             return True
         else:
             return False
@@ -126,30 +126,36 @@ class Expense_Total_Authorization(Authorization):
 
 
 class Settle_Authorization(Authorization):
-    # def read_list(self, object_list, bundle):
-    #     return object_list.filter(Q(sender__id=bundle.request.user.id) | Q(receiver__id=bundle.request.user.id)).distinct()
-    #
-    # def read_detail(self, object_list, bundle):
-    #     if object_list.filter(Q(sender__id=bundle.request.user.id) | Q(receiver__id=bundle.request.user.id)):
-    #         return True
-    #     else:
-    #         return False
-    #
-    # def update_list(self, object_list, bundle):
-    #     return object_list.filter(Q(sender__id=bundle.request.user.id) | Q(receiver__id=bundle.request.user.id)).distinct()
-    #
-    # def update_detail(self, object_list, bundle):
-    #     if object_list.filter(Q(sender__id=bundle.request.user.id) | Q(receiver__id=bundle.request.user.id)):
-    #         return True
-    #     else:
-    #         return False
-    #
-    # def delete_list(self, object_list, bundle):
-    #     return object_list.filter(Q(sender__id=bundle.request.user.id) | Q(receiver__id=bundle.request.user.id)).distinct()
-    #
-    # def delete_detail(self, object_list, bundle):
-    #     if object_list.filter(Q(sender__id=bundle.request.user.id) | Q(receiver__id=bundle.request.user.id)):
-    #         return True
-    #     else:
-    #         return False
-    pass
+    def read_list(self, object_list, bundle):
+        return object_list.filter(Q(group__creater__id=bundle.request.user.id) | Q(expense__payer__id=bundle.request.user.id) | Q(expense__splitters__id=bundle.request.user.id) |
+                                  Q(sender__id=bundle.request.user.id) | Q(receiver__id=bundle.request.user.id)).distinct()
+
+    def read_detail(self, object_list, bundle):
+        if object_list.filter(Q(group__creater__id=bundle.request.user.id) | Q(expense__payer__id=bundle.request.user.id) | Q(expense__splitters__id=bundle.request.user.id) |
+                                  Q(sender__id=bundle.request.user.id) | Q(receiver__id=bundle.request.user.id)).distinct():
+            return True
+        else:
+            return False
+
+    def update_list(self, object_list, bundle):
+        return object_list.filter(Q(group__creater__id=bundle.request.user.id) | Q(expense__payer__id=bundle.request.user.id) | Q(expense__splitters__id=bundle.request.user.id) |
+                                  Q(sender__id=bundle.request.user.id) | Q(receiver__id=bundle.request.user.id)).distinct()
+
+    def update_detail(self, object_list, bundle):
+        if object_list.filter(Q(group__creater__id=bundle.request.user.id) | Q(expense__payer__id=bundle.request.user.id) | Q(expense__splitters__id=bundle.request.user.id) |
+                                  Q(sender__id=bundle.request.user.id) | Q(receiver__id=bundle.request.user.id)).distinct():
+            return True
+        else:
+            return False
+
+    def delete_list(self, object_list, bundle):
+        return object_list.filter(Q(group__creater__id=bundle.request.user.id) | Q(expense__payer__id=bundle.request.user.id) | Q(expense__splitters__id=bundle.request.user.id) |
+                                  Q(sender__id=bundle.request.user.id) | Q(receiver__id=bundle.request.user.id)).distinct()
+
+    def delete_detail(self, object_list, bundle):
+        if object_list.filter(Q(group__creater__id=bundle.request.user.id) | Q(expense__payer__id=bundle.request.user.id) | Q(expense__splitters__id=bundle.request.user.id) |
+                                  Q(sender__id=bundle.request.user.id) | Q(receiver__id=bundle.request.user.id)).distinct():
+            return True
+        else:
+            return False
+    #pass
