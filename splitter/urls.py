@@ -14,10 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from django.urls import path, re_path, include
-from tastypie.api import Api
-from splitter.api import User_Resource, Group_Resource, Group_Friend_Resource, Expense_Resource, Expense_Total_Resource, Settle_Resource
+#from django.urls import path, re_path, include
+#from tastypie.api import Api
+from splitter.api import User_Resource, Profile_Resource, Profile_Friend_Resource, Group_Resource, Group_Friend_Resource, Expense_Resource, Expense_Total_Resource, Settle_Resource
 from splitter.authentication import New_Resource
+from django.conf.urls import url, include
 from . import views
 
 # v1_api = Api(api_name = 'v1')
@@ -30,6 +31,8 @@ from . import views
 
 new_resource = New_Resource()
 user_resource = User_Resource()
+profile_resource = Profile_Resource()
+profile_friend_resource = Profile_Friend_Resource()
 group_resource = Group_Resource()
 group_friend_resource = Group_Friend_Resource()
 expense_resource = Expense_Resource()
@@ -37,13 +40,31 @@ expense_total_resource = Expense_Total_Resource()
 settle_resource = Settle_Resource()
 
 urlpatterns = [
-    path('', include(new_resource.urls)),
-    path('', include(user_resource.urls)),
-    path('', include(group_resource.urls)),
-    path('', include(group_friend_resource.urls)),
-    path('', include(expense_resource.urls)),
-    path('', include(expense_total_resource.urls)),
-    path('', include(settle_resource.urls)),
+    url(r'', include(new_resource.urls)),
+    url(r'', include(user_resource.urls)),
+    url(r'', include(profile_resource.urls)),
+    url(r'', include(profile_friend_resource.urls)),
+    url(r'', include(group_resource.urls)),
+    url(r'', include(group_friend_resource.urls)),
+    url(r'', include(expense_resource.urls)),
+    url(r'', include(expense_total_resource.urls)),
+    url(r'', include(settle_resource.urls)),
+
+    # path('', include(new_resource.urls)),
+    # path('', include(user_resource.urls)),
+    # path('', include(group_resource.urls)),
+    # path('', include(group_friend_resource.urls)),
+    # path('', include(expense_resource.urls)),
+    # path('', include(expense_total_resource.urls)),
+    # path('', include(settle_resource.urls)),
+
+    # re_path(r'^new_resource/', include(new_resource.urls)),
+    # re_path(r'^user_resource/', include(user_resource.urls)),
+    # re_path(r'^group_resource/', include(group_resource.urls)),
+    # re_path(r'^group_friend_resource/', include(group_friend_resource.urls)),
+    # re_path(r'^expense_resource/', include(expense_resource.urls)),
+    # re_path(r'^expense_total_resource/', include(expense_total_resource.urls)),
+    # re_path(r'^settle_resource/', include(settle_resource.urls)),
 ]
 
 
