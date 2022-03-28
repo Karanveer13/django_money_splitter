@@ -5,6 +5,7 @@ Django==1.11.29
 django-heroku==0.3.1
 -e git://github.com/pavanv/django-tastypie@b4ffc642aa56d25d3c577ccae0a03c820b71c4bc#egg=django_tastypie
 django-tastypie-swagger==0.1.4
+gunicorn==20.1.0
 psycopg2==2.9.3
 psycopg2-binary==2.8.6
 python-dateutil==2.8.2
