@@ -126,7 +126,7 @@ DATABASES = {
         'USER': 'ucinxdojytcwgj',
         'PASSWORD': 'c927b1a5132524831ace13f01f38f2c02142ca479d79cb0aeafb9ddf97fa6d5c',
         'HOST': 'ec2-54-173-77-184.compute-1.amazonaws.com',
-        'PORT': 5432,
+        'PORT': '',
     }
 }
 
