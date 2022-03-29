@@ -32,10 +32,11 @@ SECRET_KEY = 'django-insecure-8livpb-366)0k*6zl)z6sr#49q1k!h%4%j)6)m=cu#5%d2_pnj
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1',]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'expenser-app-django-heroku.herokuapp.com']
 #ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
-
+# From Google https://expenser-app-django-heroku.herokuapp.com/
+# From Terminal/Firefox
 # Application definition
 
 INSTALLED_APPS = [
