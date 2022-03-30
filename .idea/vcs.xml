@@ -3,5 +3,6 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/venv2/src/django-tastypie" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/venv3/src/django-tastypie" vcs="Git" />
   </component>
 </project>

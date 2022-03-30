@@ -48,7 +48,7 @@ class New_Resource(ModelResource):
                 request, {
                     'success': True,
                     'username': username,
-                    #'id': user.id,
+                    'id': user.id,
                     'token': api_key.key
             })
         except IntegrityError:
