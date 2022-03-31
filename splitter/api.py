@@ -96,6 +96,11 @@ class Profile_Resource(ModelResource):
             'profile_friends': ALL_WITH_RELATIONS,
         }
 
+    def obj_create(self, bundle, **kwargs):
+        bundle = self.full_hydrate(bundle)
+        return super(Profile_Resource, self).obj_create(bundle, profile_user=bundle.request.user)
+
+
 class Profile_Friend_Resource(ModelResource):
     profile = fields.ForeignKey(Profile_Resource, attribute='profile', null=True)
     p_friend = fields.ForeignKey(User_Resource, attribute='p_friend', null=True)
