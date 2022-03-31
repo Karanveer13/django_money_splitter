@@ -188,4 +188,4 @@ STATICFILES_FINDERS = (
 import django_heroku
 django_heroku.settings(locals())
 
-API_LIMIT_PER_PAGE = 100000000000000
+API_LIMIT_PER_PAGE = 0
