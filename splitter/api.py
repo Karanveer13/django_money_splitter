@@ -14,11 +14,11 @@ class User_Resource(ModelResource):
     class Meta:
         queryset = User.objects.all()
         resource_name = 'user'
-        limit = None
         fields = ['username']
         allowed_methods = ['get']
         authentication = ApiKeyAuthentication()
         authorization = Authorization()
+        always_return_data = True
         filtering = {
             "username":('exact', 'startswith', 'contains','in')
         }
