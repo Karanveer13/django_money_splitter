@@ -88,6 +88,7 @@ class Profile_Resource(ModelResource):
     class Meta:
         queryset = Profile.objects.all()
         resource_name = 'profile'
+        max_limit = None
         allowed_methods = ['get', 'post']
         authentication = ApiKeyAuthentication()
         #authorization = Authorization()
@@ -110,6 +111,7 @@ class Profile_Friend_Resource(ModelResource):
     class Meta:
         queryset = Profile_Friend.objects.all()
         resource_name = 'profile_friend'
+        max_limit = None
         allowed_methods = ['get', 'post', 'delete']
         authentication = ApiKeyAuthentication()
         #authorization = Authorization()
@@ -128,6 +130,7 @@ class Group_Resource(ModelResource):
     class Meta:
         queryset = Group.objects.all()
         resource_name = 'group'
+        max_limit = None
         allowed_methods = ['get', 'post', 'put','delete']
         authentication = ApiKeyAuthentication()
         #authorization = Authorization()
@@ -149,6 +152,7 @@ class Group_Friend_Resource(ModelResource):
     class Meta:
         queryset = Group_Friend.objects.all()
         resource_name = 'group_friend'
+        max_limit = None
         allowed_methods = ['get', 'post', 'put','delete']
         authentication = ApiKeyAuthentication()
         #authorization = Authorization()
@@ -168,6 +172,7 @@ class Expense_Resource(ModelResource):
     class Meta:
         queryset = Expense.objects.all()
         resource_name = 'expense'
+        max_limit = None
         allowed_methods = ['get', 'post', 'put','delete']
         excludes = ['created_at']
         authentication = ApiKeyAuthentication()
@@ -188,6 +193,7 @@ class Expense_Total_Resource(ModelResource):
     class Meta:
         queryset = Expense_Total.objects.all()
         resource_name = 'expense_total'
+        max_limit = None
         allowed_methods = ['get', 'post', 'put','delete']
         authentication = ApiKeyAuthentication()
         #authorization = Authorization()
@@ -208,6 +214,7 @@ class Settle_Resource(ModelResource):
     class Meta:
         queryset = Settle.objects.all()
         resource_name = 'settle'
+        max_limit = None
         allowed_methods = ['get', 'post', 'put','delete']
         authentication = ApiKeyAuthentication()
         #authorization = Authorization()
