@@ -81,7 +81,7 @@ class User_Resource(ModelResource):
 
 class Profile_Resource(ModelResource):
     profile_user = fields.ForeignKey(User_Resource, attribute='profile_user', null=True)
-    profile_friends = fields.ToManyField(User_Resource, attribute = 'profile_friends', null = True, blank = True)
+    profile_friends = fields.ToManyField(User_Resource, attribute = 'profile_friends', null = True, readonly = True)
 
     class Meta:
         queryset = Profile.objects.all()
