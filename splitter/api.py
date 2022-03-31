@@ -15,6 +15,7 @@ class User_Resource(ModelResource):
         queryset = User.objects.all()
         resource_name = 'user'
         fields = ['username']
+        next = None
         allowed_methods = ['get']
         authentication = ApiKeyAuthentication()
         authorization = Authorization()
