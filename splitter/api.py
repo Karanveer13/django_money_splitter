@@ -81,7 +81,7 @@ class User_Resource(ModelResource):
 
 class Profile_Resource(ModelResource):
     profile_user = fields.ForeignKey(User_Resource, attribute='profile_user', null=True)
-    profile_friends = fields.ToManyField(User_Resource, attribute = 'profile_friends', null = True)
+    profile_friends = fields.ToManyField(User_Resource, attribute = 'profile_friends', null = True, blank = True)
 
     class Meta:
         queryset = Profile.objects.all()
@@ -96,9 +96,9 @@ class Profile_Resource(ModelResource):
             'profile_friends': ALL_WITH_RELATIONS,
         }
 
-    def obj_create(self, bundle, **kwargs):
-        bundle = self.full_hydrate(bundle)
-        return super(Profile_Resource, self).obj_create(bundle, profile_user=bundle.request.user)
+    # def obj_create(self, bundle, **kwargs):
+    #     bundle = self.full_hydrate(bundle)
+    #     return super(Profile_Resource, self).obj_create(bundle, profile_user=bundle.request.user)
 
 
 class Profile_Friend_Resource(ModelResource):
