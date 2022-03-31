@@ -14,6 +14,7 @@ class User_Resource(ModelResource):
     class Meta:
         queryset = User.objects.all()
         resource_name = 'user'
+        max_limit = None
         fields = ['username']
         allowed_methods = ['get']
         authentication = ApiKeyAuthentication()
