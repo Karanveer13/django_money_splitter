@@ -121,7 +121,7 @@ class Profile_Friend_Resource(ModelResource):
 
 class Group_Resource(ModelResource):
     creator = fields.ForeignKey(User_Resource, attribute = 'creator', null = True)
-    group_friends = fields.ToManyField(Profile_Friend_Resource, attribute = 'group_friends', null = True)
+    group_friends = fields.ToManyField(Profile_Friend_Resource, attribute = 'group_friends', null = True, readonly = True)
     #group_friends = fields.ToManyField(User_Resource, attribute='group_friends', null=True)
     class Meta:
         queryset = Group.objects.all()
@@ -161,7 +161,7 @@ class Group_Friend_Resource(ModelResource):
 class Expense_Resource(ModelResource):
     group = fields.ForeignKey(Group_Resource, attribute='group', null=True)
     payer = fields.ForeignKey(Group_Friend_Resource, attribute='payer', null=True)
-    splitters = fields.ToManyField(Group_Friend_Resource, attribute='splitters', null=True)
+    splitters = fields.ToManyField(Group_Friend_Resource, attribute='splitters', null=True, readonly = True)
 
     class Meta:
         queryset = Expense.objects.all()
