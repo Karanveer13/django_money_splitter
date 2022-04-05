@@ -144,18 +144,18 @@ class Group_Resource(ModelResource):
         }
 
 
-    def obj_create(self, bundle, **kwargs):
-        creator_data = User.objects.get(user=bundle.request.user)
-        name_data = bundle.data.get('name')
-        if len(name_data)==0:
-            raise BadRequest("Group name missing")
-
-        group_exist = Group.objects.filter(Q(creator=creator_data) & Q(name=name_data))
-        if group_exist:
-            raise BadRequest('Group already present')
-        else:
-            Group.objects.create(creator = creator_data, name = name_data)
-            return self.create_response(bundle, {'success': True})
+    # def obj_create(self, bundle, **kwargs):
+    #     creator_data = User.objects.get(user=bundle.request.user)
+    #     name_data = bundle.data.get('name')
+    #     if len(name_data)==0:
+    #         raise BadRequest("Group name missing")
+    #
+    #     group_exist = Group.objects.filter(Q(creator=creator_data) & Q(name=name_data))
+    #     if group_exist:
+    #         raise BadRequest('Group already present')
+    #     else:
+    #         Group.objects.create(creator = creator_data, name = name_data)
+    #         return self.create_response(bundle, {'success': True})
 
 
 
