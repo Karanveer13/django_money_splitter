@@ -227,19 +227,18 @@ class Settle_Resource(ModelResource):
             'receiver': ALL_WITH_RELATIONS,
         }
     #pass
+       def obj_create(self, bundle, **kwargs):
+            creater_data = User.objects.get(user=bundle.request.user)
+            name_data = bundle.data.get('name')
+            if name_data = '':
+                raise BadRequest("Group name missing")
 
-
-
-   #     def obj_create(self, bundle, **kwargs):
-    #         creater_data = User.objects.get(user=bundle.request.user)
-    #         name_data = bundle.data.get('name')
-    #         if name_data = '':
-    #             raise BadRequest("Group name missing")
-    #
-    #         group_exist = Group.objects.filter((creater=creater_data) & (queryset['name']=name_data))
-    #         if group_exist:
-    #             raise BadRequest('Group already present')
-    #         Group.objects.create(creater = creater_data, name)
+            group_exist = Group.objects.filter((creater=creater_data) & (queryset['name']=name_data))
+            if group_exist:
+                raise BadRequest('Group already present')
+            else:
+                Group.objects.create(creater = creater_data, name = name_data)
+                return self.create_response(request, {'success': True})
     #
     #         user_prof = Profile.objects.get(user=bundle.request.user)
     #         receiver_data = bundle.data.get('receiver', '')
