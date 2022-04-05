@@ -125,7 +125,7 @@ class Profile_Friend_Resource(ModelResource):
 
 class Group_Resource(ModelResource):
     creator = fields.ForeignKey(User_Resource, attribute = 'creator', null = True)
-    group_friends = fields.ToManyField(Profile_Friend_Resource, attribute = 'group_friends', null = True, readonly = True)
+    group_friends = fields.ToManyField(Profile_Friend_Resource, attribute = 'group_friends', null = True, readonly = True, full=True)
     #group_friends = fields.ToManyField(User_Resource, attribute='group_friends', null=True)
     class Meta:
         queryset = Group.objects.all()
