@@ -149,8 +149,11 @@ class Group_Resource(ModelResource):
     #     return self.create_response(bundle, {'success': True})
 
     def obj_create(self, bundle, **kwargs):
+        print(bundle)
+        print(type(bundle))
         creator_data = User.objects.get(username=bundle.request.user)
         name_data = bundle.data.get('name')
+        #name_data = bundle.obj['name']
         if len(name_data)==0:
             raise BadRequest("Group name missing")
 
