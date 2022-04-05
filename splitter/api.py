@@ -154,7 +154,7 @@ class Group_Resource(ModelResource):
         if group_exist:
             raise BadRequest('Group already present')
         else:
-            Group.objects.create(creater = creater_data, name = name_data)
+            Group.objects.create(creater = creator_data, name = name_data)
             return self.create_response(bundle, {'success': True})
 
 
