@@ -143,8 +143,8 @@ class Group_Resource(ModelResource):
             'name': ['exact'],
         }
 
-    def obj_create(self, bundle, **kwargs):
-        bundle = self.full_hydrate(bundle)
+    def obj_create(self, request, **kwargs):
+        bundle = self.full_hydrate(request)
         super(Group_Resource, self).obj_create(bundle, creator=bundle.request.user)
         return self.create_response(bundle, {'success': True})
 
