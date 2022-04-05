@@ -8,6 +8,7 @@ from tastypie.constants import ALL, ALL_WITH_RELATIONS
 from .models import Profile, Profile_Friend, Group, Group_Friend, Expense, Expense_Total, Settle
 from tastypie.exceptions import BadRequest
 from django.db.models import Q
+from django.db.models.query import QuerySet
 #from django.urls import path
 
 class User_Resource(ModelResource):
@@ -142,6 +143,19 @@ class Group_Resource(ModelResource):
             'name': ['exact'],
         }
 
+        def obj_create(self, bundle, **kwargs):
+            creator_data = User.objects.get(user=bundle.request.user)
+            name_data = bundle.data.get('name')
+            if len(name_data)==0:
+                raise BadRequest("Group name missing")
+
+            group_exist = Group.objects.filter(Q(creator=creator_data) & Q(name=name_data))
+            if group_exist:
+                raise BadRequest('Group already present')
+            else:
+                Group.objects.create(creater = creater_data, name = name_data)
+                return self.create_response(bundle, {'success': True})
+
 
 
 class Group_Friend_Resource(ModelResource):
@@ -227,18 +241,18 @@ class Settle_Resource(ModelResource):
             'receiver': ALL_WITH_RELATIONS,
         }
     #pass
-       def obj_create(self, bundle, **kwargs):
-            creater_data = User.objects.get(user=bundle.request.user)
-            name_data = bundle.data.get('name')
-            if name_data = '':
-                raise BadRequest("Group name missing")
-
-            group_exist = Group.objects.filter((creater=creater_data) & (name=name_data))
-            if group_exist:
-                raise BadRequest('Group already present')
-            else:
-                Group.objects.create(creater = creater_data, name = name_data)
-                return self.create_response(request, {'success': True})
+        # def obj_create(self, bundle, **kwargs):
+        #     creater_data = User.objects.get(user=bundle.request.user)
+        #     name_data = bundle.data.get('name')
+        #     if len(name_data)==0:
+        #         raise BadRequest("Group name missing")
+        #
+        #     group_exist = Group.objects.filter((creator=creator_data) & (name=name_data))
+        #     if group_exist:
+        #         raise BadRequest('Group already present')
+        #     else:
+        #         Group.objects.create(creater = creater_data, name = name_data)
+        #         return self.create_response(bundle, {'success': True})
     #
     #         user_prof = Profile.objects.get(user=bundle.request.user)
     #         receiver_data = bundle.data.get('receiver', '')
