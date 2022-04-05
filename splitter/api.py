@@ -233,7 +233,7 @@ class Settle_Resource(ModelResource):
             if name_data = '':
                 raise BadRequest("Group name missing")
 
-            group_exist = Group.objects.filter((creater=creater_data) & (queryset['name']=name_data))
+            group_exist = Group.objects.filter((creater=creater_data) & (name=name_data))
             if group_exist:
                 raise BadRequest('Group already present')
             else:
