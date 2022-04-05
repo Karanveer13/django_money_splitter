@@ -154,7 +154,7 @@ class Group_Resource(ModelResource):
         if len(name_data)==0:
             raise BadRequest("Group name missing")
 
-        group_exist = Group.objects.filter(Q(creator=creator_data) | Q(name=name_data))
+        group_exist = Group.objects.filter(Q(creator=creator_data) & Q(name=name_data))
         if group_exist:
             raise BadRequest('Group already present')
         else:
