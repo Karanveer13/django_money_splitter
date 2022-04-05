@@ -157,7 +157,7 @@ class Group_Friend_Resource(ModelResource):
         authentication = ApiKeyAuthentication()
         #authorization = Authorization()
         authorization = Group_Friend_Authorization()
-        always_return_data = True
+        #always_return_data = True
         filtering = {
             'group': ALL_WITH_RELATIONS,
             'friend': ALL_WITH_RELATIONS,
