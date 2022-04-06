@@ -31,7 +31,7 @@ from django.core.exceptions import (
 from django.core.signals import got_request_exception
 from django.core.exceptions import ImproperlyConfigured
 from django.db.models.fields.related import ForeignKey
-from django.urls.conf import re_path
+#from django.urls.conf import re_path
 from tastypie.utils.timezone import make_naive_utc
 try:
     from django.contrib.gis.db.models.fields import GeometryField
