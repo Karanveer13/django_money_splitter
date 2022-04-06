@@ -132,6 +132,17 @@ class Profile_Friend_Resource(ModelResource):
             'p_friend': ALL_WITH_RELATIONS,
         }
 
+    def delete_detail(self, request, **kwargs):
+        bundle = Bundle(request=request)
+
+        try:
+            self.obj_delete(bundle=bundle, **self.remove_api_resource_names(kwargs))
+            return JsonResponse({'success': True})
+
+        except NotFound:
+            return JsonResponse({'success': False})
+
+
 
 class Group_Resource(ModelResource):
     creator = fields.ForeignKey(User_Resource, attribute = 'creator', null = True)
