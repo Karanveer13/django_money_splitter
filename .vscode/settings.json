@@ -1,9 +1,4 @@
 {
     "git.ignoreLimitWarning": true,
-    "python.pythonPath": "venv/bin/python3.8",
-    "workbench.colorCustomizations": {
-        "activityBar.background": "#0A3512",
-        "titleBar.activeBackground": "#0E4B19",
-        "titleBar.activeForeground": "#F2FCF4"
-    }
+    "python.pythonPath": "venv/bin/python3.8"
 }
