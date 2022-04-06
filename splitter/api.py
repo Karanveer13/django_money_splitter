@@ -281,8 +281,8 @@ class Expense_Resource(ModelResource):
 
 
 class Expense_Total_Resource(ModelResource):
-    sender = fields.ForeignKey(User_Resource, attribute='sender', null=True)
-    receiver = fields.ForeignKey(User_Resource, attribute='receiver', null=True)
+    sender = fields.ForeignKey(Group_Friend_Resource, attribute='sender', null=True)
+    receiver = fields.ForeignKey(Group_Friend_Resource, attribute='receiver', null=True)
 
     class Meta:
         queryset = Expense_Total.objects.all()

@@ -54,8 +54,8 @@ class Expense(models.Model):
 
 
 class Expense_Total(models.Model):
-    sender = models.ForeignKey(User, on_delete = models.CASCADE, related_name = 'Expense_total_sender')
-    receiver = models.ForeignKey(User, on_delete= models.CASCADE, related_name = 'Expense_total_receiver')
+    sender = models.ForeignKey(Group_Friend, on_delete = models.CASCADE, related_name = 'Expense_total_sender')
+    receiver = models.ForeignKey(Group_Friend, on_delete= models.CASCADE, related_name = 'Expense_total_receiver')
     final_amount = models.IntegerField()
 
     def __str__(self):
