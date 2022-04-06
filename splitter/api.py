@@ -176,11 +176,11 @@ class Group_Resource(ModelResource):
         except NotFound:
             return JsonResponse({'success': False})
 
-    def obj_create(self, request, **kwargs):
-        bundle = self.full_hydrate(request)
-        super(Group_Resource, self).obj_create(bundle, creator=bundle.request.user)
-        return JsonResponse({'success': True})
-        #return self.create_response(bundle, {'success': True})
+    # def obj_create(self, request, **kwargs):
+    #     bundle = self.full_hydrate(request)
+    #     super(Group_Resource, self).obj_create(bundle, creator=bundle.request.user)
+    #     return JsonResponse({'success': True})
+    #     return self.create_response(bundle, {'success': True})
 
     # def obj_create(self, bundle, **kwargs):
     #     print(bundle)
@@ -237,6 +237,16 @@ class Group_Friend_Resource(ModelResource):
             #'user': ALL_WITH_RELATIONS,
         }
 
+    def delete_detail(self, request, **kwargs):
+        bundle = Bundle(request=request)
+
+        try:
+            self.obj_delete(bundle=bundle, **self.remove_api_resource_names(kwargs))
+            return JsonResponse({'success': True})
+
+        except NotFound:
+            return JsonResponse({'success': False})
+
 
 class Expense_Resource(ModelResource):
     group = fields.ForeignKey(Group_Resource, attribute='group', null=True)
@@ -257,6 +267,16 @@ class Expense_Resource(ModelResource):
             'payer': ALL_WITH_RELATIONS,
             'splitters': ALL_WITH_RELATIONS,
         }
+
+    def delete_detail(self, request, **kwargs):
+        bundle = Bundle(request=request)
+
+        try:
+            self.obj_delete(bundle=bundle, **self.remove_api_resource_names(kwargs))
+            return JsonResponse({'success': True})
+
+        except NotFound:
+            return JsonResponse({'success': False})
     #pass
 
 
@@ -276,6 +296,17 @@ class Expense_Total_Resource(ModelResource):
             'sender': ALL_WITH_RELATIONS,
             'receiver': ALL_WITH_RELATIONS,
         }
+
+    def delete_detail(self, request, **kwargs):
+        bundle = Bundle(request=request)
+
+        try:
+            self.obj_delete(bundle=bundle, **self.remove_api_resource_names(kwargs))
+            return JsonResponse({'success': True})
+
+        except NotFound:
+            return JsonResponse({'success': False})
+
     #pass
 
 
@@ -299,6 +330,17 @@ class Settle_Resource(ModelResource):
             'sender': ALL_WITH_RELATIONS,
             'receiver': ALL_WITH_RELATIONS,
         }
+
+    def delete_detail(self, request, **kwargs):
+        bundle = Bundle(request=request)
+
+        try:
+            self.obj_delete(bundle=bundle, **self.remove_api_resource_names(kwargs))
+            return JsonResponse({'success': True})
+
+        except NotFound:
+            return JsonResponse({'success': False})
+
     #pass
         # def obj_create(self, bundle, **kwargs):
         #     creater_data = User.objects.get(user=bundle.request.user)
