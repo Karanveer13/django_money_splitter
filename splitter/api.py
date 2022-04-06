@@ -6,6 +6,7 @@ from tastypie import fields
 from splitter.authorization import Profile_Authorization, Profile_Friend_Authorization, Group_Authorization, Group_Friend_Authorization, Expense_Authorization, Expense_Total_Authorization, Settle_Authorization
 from tastypie.constants import ALL, ALL_WITH_RELATIONS
 from .models import Profile, Profile_Friend, Group, Group_Friend, Expense, Expense_Total, Settle
+from tastypie.bundle import Bundle
 from tastypie.exceptions import BadRequest
 from django.db.models import Q
 from django.db.models.query import QuerySet
