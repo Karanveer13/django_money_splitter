@@ -12,6 +12,7 @@ from tastypie.exceptions import (
     ImmediateHttpResponse, Unauthorized, UnsupportedFormat,
     UnsupportedSerializationFormat, UnsupportedDeserializationFormat,
 )
+from django.http import JsonResponse
 from tastypie import http
 
 from tastypie.exceptions import BadRequest
@@ -182,11 +183,13 @@ class Group_Resource(ModelResource):
             self.obj_delete(bundle=bundle, **self.remove_api_resource_names(kwargs))
             #return http.HttpNoContent() + "success:True"
             #return "success:True"
-            return self.create_response(bundle, {'success': True})
+            return JsonResponse({'foo': 'bar'})
+            #return self.create_response(bundle, {'success': True})
 
         except NotFound:
             #return http.HttpNoContent() + "success:True"
-            return self.create_response(bundle, {'success': False})
+            return JsonResponse({'foo': 'bar no'})
+            #return self.create_response(bundle, {'success': False})
             #return "success:True"
 
     # def obj_create(self, request, **kwargs):
