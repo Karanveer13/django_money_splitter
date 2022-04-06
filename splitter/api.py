@@ -3,9 +3,9 @@ from tastypie.authorization import Authorization, DjangoAuthorization
 from django.contrib.auth.models import User
 from tastypie.resources import ModelResource
 from tastypie import fields
-from splitter.authorization import Profile_Authorization, Profile_Friend_Authorization, Group_Authorization, Group_Friend_Authorization, Expense_Authorization, Splitters_Authorization,Expense_Total_Authorization, Settle_Authorization
+from splitter.authorization import Profile_Authorization, Profile_Friend_Authorization, Group_Authorization, Group_Friend_Authorization, Expense_Authorization, Expense_Splitter_Authorization,Expense_Total_Authorization, Settle_Authorization
 from tastypie.constants import ALL, ALL_WITH_RELATIONS
-from .models import Profile, Profile_Friend, Group, Group_Friend, Expense, Splitters, Expense_Total, Settle
+from .models import Profile, Profile_Friend, Group, Group_Friend, Expense, Expense_Splitter, Expense_Total, Settle
 from tastypie.bundle import Bundle
 from tastypie.exceptions import (
     NotFound, BadRequest, InvalidFilterError, HydrationError, InvalidSortError,
@@ -290,17 +290,17 @@ class Expense_Resource(ModelResource):
             return JsonResponse({'success': False})
     #pass
 
-class Splitters_Resource(ModelResource):
+class Expense_Splitter_Resource(ModelResource):
     expense = fields.ForeignKey(Expense_Resource, attribute='expense', null=True)
     e_splitter = fields.ForeignKey(Group_Friend_Resource, attribute='e_splitter', null=True, full=True)
     class Meta:
-        queryset = Splitters.objects.all()
-        resource_name = 'splitters'
+        queryset = Expense_Splitter.objects.all()
+        resource_name = 'expense_splitter'
         max_limit = None
         allowed_methods = ['get', 'post', 'put','delete']
         authentication = ApiKeyAuthentication()
         #authorization = Authorization()
-        authorization = Splitters_Authorization()
+        authorization = Expense_Splitter_Authorization()
         always_return_data = True
         filtering = {
             'expense': ALL_WITH_RELATIONS,

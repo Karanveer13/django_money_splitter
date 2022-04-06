@@ -16,7 +16,7 @@ Including another URLconf
 
 #from django.urls import path, re_path, include
 #from tastypie.api import Api
-from splitter.api import User_Resource, Profile_Resource, Profile_Friend_Resource, Group_Resource, Group_Friend_Resource, Expense_Resource, Splitters_Resource, Expense_Total_Resource, Settle_Resource
+from splitter.api import User_Resource, Profile_Resource, Profile_Friend_Resource, Group_Resource, Group_Friend_Resource, Expense_Resource, Expense_Splitter_Resource, Expense_Total_Resource, Settle_Resource
 from splitter.authentication import New_Resource
 from django.conf.urls import url, include
 from . import views
@@ -36,7 +36,7 @@ profile_friend_resource = Profile_Friend_Resource()
 group_resource = Group_Resource()
 group_friend_resource = Group_Friend_Resource()
 expense_resource = Expense_Resource()
-splitters_resource = Splitters_Resource()
+expense_splitter_resource = Expense_Splitter_Resource()
 expense_total_resource = Expense_Total_Resource()
 settle_resource = Settle_Resource()
 
@@ -48,7 +48,7 @@ urlpatterns = [
     url(r'', include(group_resource.urls)),
     url(r'', include(group_friend_resource.urls)),
     url(r'', include(expense_resource.urls)),
-    url(r'', include(splitters_resource.urls)),
+    url(r'', include(expense_splitter_resource.urls)),
     url(r'', include(expense_total_resource.urls)),
     url(r'', include(settle_resource.urls)),
 
