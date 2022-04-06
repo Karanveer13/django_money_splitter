@@ -1,6 +1,6 @@
 from tastypie.authorization import Authorization
 from django.db.models import Q
-from splitter.models import Profile, Profile_Friend, Group, Group_Friend, Expense, Expense_Total, Settle
+from splitter.models import Profile, Profile_Friend, Group, Group_Friend, Expense, Splitter, Expense_Total, Settle
 from django.db.models.query import QuerySet
 import pickle
 from itertools import chain
@@ -152,6 +152,36 @@ class Expense_Authorization(Authorization):
         else:
             return False
     #pass
+
+class Splitter_Authorization(Authorization):
+    # def read_list(self, object_list, bundle):
+    #     return object_list.filter(Q(group__creator__id=bundle.request.user.id) | Q(friend__id=bundle.request.user.id)).distinct()
+    #
+    # def read_detail(self, object_list, bundle):
+    #     if object_list.filter(Q(group__creator__id=bundle.request.user.id) | Q(friend__id=bundle.request.user.id)).distinct():
+    #         return True
+    #     else:
+    #         return False
+    #
+    # def update_list(self, object_list, bundle):
+    #     return object_list.filter(Q(group__creator__id=bundle.request.user.id) | Q(friend__id=bundle.request.user.id)).distinct()
+    #
+    # def update_detail(self, object_list, bundle):
+    #     if object_list.filter(Q(group__creator__id=bundle.request.user.id) | Q(friend__id=bundle.request.user.id)).distinct():
+    #         return True
+    #     else:
+    #         return False
+    #
+    # def delete_list(self, object_list, bundle):
+    #     return object_list.filter(Q(group__creator__id=bundle.request.user.id) | Q(friend__id=bundle.request.user.id)).distinct()
+    #
+    # def delete_detail(self, object_list, bundle):
+    #     if object_list.filter(Q(group__creator__id=bundle.request.user.id) | Q(friend__id=bundle.request.user.id)).distinct():
+    #         return True
+    #     else:
+    #         return False
+    pass
+
 
 
 class Expense_Total_Authorization(Authorization):

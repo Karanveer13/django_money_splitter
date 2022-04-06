@@ -3,9 +3,9 @@ from tastypie.authorization import Authorization, DjangoAuthorization
 from django.contrib.auth.models import User
 from tastypie.resources import ModelResource
 from tastypie import fields
-from splitter.authorization import Profile_Authorization, Profile_Friend_Authorization, Group_Authorization, Group_Friend_Authorization, Expense_Authorization, Expense_Total_Authorization, Settle_Authorization
+from splitter.authorization import Profile_Authorization, Profile_Friend_Authorization, Group_Authorization, Group_Friend_Authorization, Expense_Authorization, Splitter_Authorization,Expense_Total_Authorization, Settle_Authorization
 from tastypie.constants import ALL, ALL_WITH_RELATIONS
-from .models import Profile, Profile_Friend, Group, Group_Friend, Expense, Expense_Total, Settle
+from .models import Profile, Profile_Friend, Group, Group_Friend, Expense, Splitter, Expense_Total, Settle
 from tastypie.bundle import Bundle
 from tastypie.exceptions import (
     NotFound, BadRequest, InvalidFilterError, HydrationError, InvalidSortError,
@@ -289,6 +289,34 @@ class Expense_Resource(ModelResource):
         except NotFound:
             return JsonResponse({'success': False})
     #pass
+
+class Splitter_Resource(ModelResource):
+    expense = fields.ForeignKey(Expense_Resource, attribute='expense', null=True)
+    e_splitter = fields.ForeignKey(Group_Friend_Resource, attribute='e_splitter', null=True, full=True)
+    class Meta:
+        queryset = Splitter.objects.all()
+        resource_name = 'splitter'
+        max_limit = None
+        allowed_methods = ['get', 'post', 'put','delete']
+        authentication = ApiKeyAuthentication()
+        #authorization = Authorization()
+        authorization = Splitter_Authorization()
+        always_return_data = True
+        filtering = {
+            'expense': ALL_WITH_RELATIONS,
+            'e_splitter': ALL_WITH_RELATIONS,
+        }
+
+    def delete_detail(self, request, **kwargs):
+        bundle = Bundle(request=request)
+
+        try:
+            self.obj_delete(bundle=bundle, **self.remove_api_resource_names(kwargs))
+            return JsonResponse({'success': True})
+
+        except NotFound:
+            return JsonResponse({'success': False})
+
 
 
 class Expense_Total_Resource(ModelResource):
