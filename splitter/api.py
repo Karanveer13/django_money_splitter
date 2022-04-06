@@ -180,9 +180,11 @@ class Group_Resource(ModelResource):
 
         try:
             self.obj_delete(bundle=bundle, **self.remove_api_resource_names(kwargs))
-            return http.HttpNoContent() + "success:True"
+            #return http.HttpNoContent() + "success:True"
+            return "success:True"
         except NotFound:
-            return http.HttpNotFound() + "success:True"
+            #return http.HttpNoContent() + "success:True"
+            return "success:True"
 
     # def obj_create(self, request, **kwargs):
     #     bundle = self.full_hydrate(request)
