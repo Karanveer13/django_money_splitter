@@ -59,7 +59,7 @@ class Expense_Total(models.Model):
     final_amount = models.IntegerField()
 
     def __str__(self):
-        return self.sender.username + ' gives amount ' + str(self.final_amount) + ' to ' +self.receiver.username
+        return self.sender.friend.p_friend.username + ' gives amount ' + str(self.final_amount) + ' to ' +self.receiver.friend.p_friend.username
 
 
 class Settle(models.Model):
