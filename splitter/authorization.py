@@ -154,6 +154,7 @@ class Expense_Authorization(Authorization):
     #pass
 
 class Expense_Splitter_Authorization(Authorization):
+    pass
     # def read_list(self, object_list, bundle):
     #     return object_list.filter(Q(group__creator__id=bundle.request.user.id) | Q(friend__id=bundle.request.user.id)).distinct()
     #
@@ -180,7 +181,7 @@ class Expense_Splitter_Authorization(Authorization):
     #         return True
     #     else:
     #         return False
-    pass
+    #pass
 
 
 
