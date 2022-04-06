@@ -143,6 +143,22 @@ class Group_Resource(ModelResource):
             'name': ['exact'],
         }
 
+    #def obj_delete_list(self, bundle, **kwargs):
+
+    def delete_list(self, request, **kwargs):
+        """
+        Destroys a collection of resources/objects.
+
+        Calls ``obj_delete_list``.
+
+        If the resources are deleted, return ``HttpNoContent`` (204 No Content).
+        """
+        bundle = self.build_bundle(request=request)
+        self.obj_delete_list(bundle=bundle, request=request, **self.remove_api_resource_names(kwargs))
+        return http.HttpNoContent() + "success:True"
+
+
+
     # def obj_create(self, request, **kwargs):
     #     bundle = self.full_hydrate(request)
     #     #super(Group_Resource, self).obj_create(bundle, creator=bundle.request.user)
