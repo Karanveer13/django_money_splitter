@@ -183,12 +183,12 @@ class Group_Resource(ModelResource):
             self.obj_delete(bundle=bundle, **self.remove_api_resource_names(kwargs))
             #return http.HttpNoContent() + "success:True"
             #return "success:True"
-            return JsonResponse({'foo': 'bar'})
+            return JsonResponse({'success': True})
             #return self.create_response(bundle, {'success': True})
 
         except NotFound:
             #return http.HttpNoContent() + "success:True"
-            return JsonResponse({'foo': 'bar no'})
+            return JsonResponse({'success': False})
             #return self.create_response(bundle, {'success': False})
             #return "success:True"
 
