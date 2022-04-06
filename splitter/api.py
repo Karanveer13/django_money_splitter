@@ -12,71 +12,7 @@ from tastypie.exceptions import (
     ImmediateHttpResponse, Unauthorized, UnsupportedFormat,
     UnsupportedSerializationFormat, UnsupportedDeserializationFormat,
 )
-
-#from __future__ import unicode_literals
-
-from copy import copy, deepcopy
-from datetime import datetime
-import logging
-import sys
-from time import mktime
-import traceback
-import warnings
-from wsgiref.handlers import format_date_time
-
-from django.conf import settings
-from django.core.exceptions import (
-    ObjectDoesNotExist, MultipleObjectsReturned, ValidationError, FieldDoesNotExist
-)
-from django.core.signals import got_request_exception
-from django.core.exceptions import ImproperlyConfigured
-from django.db.models.fields.related import ForeignKey
-#from django.urls.conf import re_path
-from tastypie.utils.timezone import make_naive_utc
-try:
-    from django.contrib.gis.db.models.fields import GeometryField
-except (ImproperlyConfigured, ImportError):
-    GeometryField = None
-from django.db.models.constants import LOOKUP_SEP
-try:
-    from django.db.models.fields.related import\
-        SingleRelatedObjectDescriptor as ReverseOneToOneDescriptor
-except ImportError:
-    from django.db.models.fields.related_descriptors import\
-        ReverseOneToOneDescriptor
-
-from django.http import HttpResponse, HttpResponseNotFound, Http404
-from django.utils.cache import patch_cache_control, patch_vary_headers
-from django.utils.html import escape
-from django.views.decorators.csrf import csrf_exempt
-
-import six
-
-from tastypie.authentication import Authentication
-from tastypie.authorization import ReadOnlyAuthorization
-from tastypie.bundle import Bundle
-from tastypie.cache import NoCache
-from tastypie.compat import NoReverseMatch, reverse, Resolver404, get_script_prefix, is_ajax
-from tastypie.constants import ALL, ALL_WITH_RELATIONS
-from tastypie.exceptions import (
-    NotFound, BadRequest, InvalidFilterError, HydrationError, InvalidSortError,
-    ImmediateHttpResponse, Unauthorized, UnsupportedFormat,
-    UnsupportedSerializationFormat, UnsupportedDeserializationFormat,
-)
-from tastypie import fields
 from tastypie import http
-from tastypie.paginator import Paginator
-from tastypie.serializers import Serializer
-from tastypie.throttle import BaseThrottle
-from tastypie.utils import (
-    dict_strip_unicode_keys, is_valid_jsonp_callback_value, string_to_python,
-    trailing_slash,
-)
-from tastypie.utils.mime import determine_format, build_content_type
-from tastypie.validation import Validation
-from tastypie.compat import get_module_name, atomic_decorator
-
-
 
 from tastypie.exceptions import BadRequest
 from django.db.models import Q
