@@ -48,8 +48,9 @@ class Expense(models.Model):
     reason = models.CharField(max_length = 250)
     created_at = models.DateTimeField(auto_now=True)
     payer = models.ForeignKey(Group_Friend, on_delete = models.CASCADE, related_name = 'Expense_payer')
-    #splitters = models.ManyToManyField(Group_Friend,related_name = "Expense_splitters")
+    #splitters = models.ManyToManyField(Group_Friend, related_name = "Expense_splitters")
     splitters = models.ManyToManyField(Group_Friend, through="Expense_Splitter", related_name="Expense_splitters")
+
     def __str__(self):
         return self.reason + ' in group ' + self.group.name
 
@@ -59,7 +60,7 @@ class Expense_Splitter(models.Model):
     owes = models.IntegerField()
 
     def __str__(self):
-        return  self.e_splitter.p_friend.username +' in expense ' + self.expense.reason + ' owes ' + self.owes
+        return self.e_splitter.friend.p_friend.username + ' in expense ' + self.expense.reason + ' owes ' + self.owes
 
     class Meta:
         unique_together = ('expense','e_splitter')
