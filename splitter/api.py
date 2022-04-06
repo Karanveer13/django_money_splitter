@@ -13,7 +13,7 @@ from tastypie.exceptions import (
     UnsupportedSerializationFormat, UnsupportedDeserializationFormat,
 )
 
-from __future__ import unicode_literals
+#from __future__ import unicode_literals
 
 from copy import copy, deepcopy
 from datetime import datetime
