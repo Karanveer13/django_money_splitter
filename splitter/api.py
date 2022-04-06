@@ -157,7 +157,24 @@ class Group_Resource(ModelResource):
         self.obj_delete_list(bundle=bundle, request=request, **self.remove_api_resource_names(kwargs))
         return http.HttpNoContent() + "success:True"
 
+    def delete_detail(self, request, **kwargs):
+        """
+        Destroys a single resource/object.
 
+        Calls ``obj_delete``.
+
+        If the resource is deleted, return ``HttpNoContent`` (204 No Content).
+        If the resource did not exist, return ``Http404`` (404 Not Found).
+        """
+        # Manually construct the bundle here, since we don't want to try to
+        # delete an empty instance.
+        bundle = Bundle(request=request)
+
+        try:
+            self.obj_delete(bundle=bundle, **self.remove_api_resource_names(kwargs))
+            return http.HttpNoContent() + "success:True"
+        except NotFound:
+            return http.HttpNotFound() + "success:True"
 
     # def obj_create(self, request, **kwargs):
     #     bundle = self.full_hydrate(request)
