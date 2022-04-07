@@ -58,7 +58,7 @@ class Expense_Splitter(models.Model):
     owes = models.IntegerField()
 
     def __str__(self):
-        return  self.e_splitter.p_friend.username +' in expense ' + self.expense.reason + ' owes ' + self.owes
+        return  self.e_splitter.friend.p_friend.username +' in expense ' + self.expense.reason + ' owes ' + self.owes
 
     class Meta:
         unique_together = ('expense','e_splitter')
