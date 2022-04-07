@@ -6,14 +6,14 @@ from tastypie.models import create_api_key
 models.signals.post_save.connect(create_api_key, sender=User)
 
 class Profile(models.Model):
-    profile_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="Profile_User")
+    profile_user = models.ForeignKey(User, on_delete=models.CASCADE)
     profile_friends = models.ManyToManyField(User, through="Profile_Friend", related_name="Profile_Friends")
     def __str__(self):
         return self.profile_user.username
 
 class Profile_Friend(models.Model):
-    profile = models.ForeignKey(Profile, on_delete = models.CASCADE, related_name = "Profile_user")
-    p_friend = models.ForeignKey(User, on_delete=models.CASCADE, related_name="Profile_Friend")
+    profile = models.ForeignKey(Profile, on_delete = models.CASCADE)
+    p_friend = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.p_friend.username + ' is friend of ' + self.profile.profile_user.username
@@ -22,7 +22,7 @@ class Profile_Friend(models.Model):
         unique_together = ('profile','p_friend')
 
 class Group(models.Model):
-    creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="Creator")
+    creator = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=250)
     group_friends = models.ManyToManyField(Profile_Friend, through="Group_Friend",  related_name="Group_Friends")
     #group_friends = models.ManyToManyField(User, through="Group_Friend", related_name="Group_Friends")
@@ -31,8 +31,8 @@ class Group(models.Model):
 
 
 class Group_Friend(models.Model):
-    group = models.ForeignKey(Group, on_delete = models.CASCADE, related_name = "Group_name")
-    friend = models.ForeignKey(Profile_Friend, on_delete=models.CASCADE, related_name="Profile_Friend_group")
+    group = models.ForeignKey(Group, on_delete = models.CASCADE)
+    friend = models.ForeignKey(Profile_Friend, on_delete=models.CASCADE)
 
 
     def __str__(self):
@@ -43,20 +43,19 @@ class Group_Friend(models.Model):
 
 
 class Expense(models.Model):
-    group = models.ForeignKey(Group, on_delete = models.CASCADE, related_name = 'Expense_group')
+    group = models.ForeignKey(Group, on_delete = models.CASCADE)
     amount = models.IntegerField()
     reason = models.CharField(max_length = 250)
     created_at = models.DateTimeField(auto_now=True)
-    payer = models.ForeignKey(Group_Friend, on_delete = models.CASCADE, related_name = 'Expense_payer')
-    #splitters = models.ManyToManyField(Group_Friend, related_name = "Expense_splitters")
-    splitters = models.ManyToManyField(Group_Friend, through="Expense_Splitter", related_name="Expense_splitters")
+    payer = models.ForeignKey(Group_Friend, on_delete = models.CASCADE)
+    splitters = models.ManyToManyField(Group_Friend, through="Expense_Member", related_name="splitters_expenses", null = True, blank = True)
 
     def __str__(self):
         return self.reason + ' in group ' + self.group.name
 
-class Expense_Splitter(models.Model):
-    expense = models.ForeignKey(Expense, on_delete = models.CASCADE, related_name = "Expense_name")
-    e_splitter = models.ForeignKey(Group_Friend, on_delete=models.CASCADE, related_name="Expense_Group_Friend")
+class Expense_Member(models.Model):
+    expense = models.ForeignKey(Expense, on_delete = models.CASCADE)
+    e_splitter = models.ForeignKey(Group_Friend, on_delete=models.CASCADE)
     owes = models.IntegerField()
 
     def __str__(self):

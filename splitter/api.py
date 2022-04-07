@@ -3,9 +3,9 @@ from tastypie.authorization import Authorization, DjangoAuthorization
 from django.contrib.auth.models import User
 from tastypie.resources import ModelResource
 from tastypie import fields
-from splitter.authorization import Profile_Authorization, Profile_Friend_Authorization, Group_Authorization, Group_Friend_Authorization, Expense_Authorization, Expense_Splitter_Authorization,Expense_Total_Authorization, Settle_Authorization
+from splitter.authorization import Profile_Authorization, Profile_Friend_Authorization, Group_Authorization, Group_Friend_Authorization, Expense_Authorization, Expense_Member_Authorization,Expense_Total_Authorization, Settle_Authorization
 from tastypie.constants import ALL, ALL_WITH_RELATIONS
-from .models import Profile, Profile_Friend, Group, Group_Friend, Expense, Expense_Splitter, Expense_Total, Settle
+from .models import Profile, Profile_Friend, Group, Group_Friend, Expense, Expense_Member, Expense_Total, Settle
 from tastypie.bundle import Bundle
 from tastypie.exceptions import (
     NotFound, BadRequest, InvalidFilterError, HydrationError, InvalidSortError,
@@ -262,7 +262,7 @@ class Group_Friend_Resource(ModelResource):
 class Expense_Resource(ModelResource):
     group = fields.ForeignKey(Group_Resource, attribute='group', null=True)
     payer = fields.ForeignKey(Group_Friend_Resource, attribute='payer', null=True)
-    splitters = fields.ToManyField(Group_Friend_Resource, attribute='splitters', null=True, readonly = True)
+    #splitters = fields.ToManyField(Group_Friend_Resource, attribute='splitters', null=True, readonly = True)
 
     class Meta:
         queryset = Expense.objects.all()
@@ -277,6 +277,7 @@ class Expense_Resource(ModelResource):
             'group': ALL_WITH_RELATIONS,
             'payer': ALL_WITH_RELATIONS,
             'splitters': ALL_WITH_RELATIONS,
+            #'splitter': ALL_WITH_RELATIONS,
         }
 
     def delete_detail(self, request, **kwargs):
@@ -290,18 +291,18 @@ class Expense_Resource(ModelResource):
             return JsonResponse({'success': False})
     #pass
 
-class Expense_Splitter_Resource(ModelResource):
+class Expense_Member_Resource(ModelResource):
     expense = fields.ForeignKey(Expense_Resource, attribute='expense', null=True)
     e_splitter = fields.ForeignKey(Group_Friend_Resource, attribute='e_splitter', null=True, full=True)
 
     class Meta:
-        queryset = Expense_Splitter.objects.all()
-        resource_name = 'expense_splitter'
+        queryset = Expense_Member.objects.all()
+        resource_name = 'expense_member'
         max_limit = None
         allowed_methods = ['get', 'post', 'put','delete']
         authentication = ApiKeyAuthentication()
         #authorization = Authorization()
-        authorization = Expense_Splitter_Authorization()
+        authorization = Expense_Member_Authorization()
         always_return_data = True
         filtering = {
             'expense': ALL_WITH_RELATIONS,

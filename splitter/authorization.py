@@ -1,6 +1,6 @@
 from tastypie.authorization import Authorization
 from django.db.models import Q
-from splitter.models import Profile, Profile_Friend, Group, Group_Friend, Expense, Expense_Splitter, Expense_Total, Settle
+from splitter.models import Profile, Profile_Friend, Group, Group_Friend, Expense, Expense_Member, Expense_Total, Settle
 from django.db.models.query import QuerySet
 import pickle
 from itertools import chain
@@ -153,7 +153,7 @@ class Expense_Authorization(Authorization):
             return False
     #pass
 
-class Expense_Splitter_Authorization(Authorization):
+class Expense_Member_Authorization(Authorization):
     def read_list(self, object_list, bundle):
         return object_list.filter(Q(expense__group__creator__id=bundle.request.user.id) | Q(expense__payer__id=bundle.request.user.id) | Q(expense__e_splitter__friend__p_friend__id=bundle.request.user.id)).distinct()
 
