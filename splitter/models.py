@@ -48,7 +48,7 @@ class Expense(models.Model):
     reason = models.CharField(max_length = 250)
     created_at = models.DateTimeField(auto_now=True)
     payer = models.ForeignKey(Group_Friend, on_delete = models.CASCADE)
-    splitters = models.ManyToManyField(Group_Friend, through="Expense_Member", related_name="splitters_expenses", null = True, blank = True)
+    splitters = models.ManyToManyField(Group_Friend, through="Expense_Member", related_name="splitters_expenses", blank = True)
 
     def __str__(self):
         return self.reason + ' in group ' + self.group.name

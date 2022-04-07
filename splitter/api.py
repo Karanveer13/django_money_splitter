@@ -262,7 +262,7 @@ class Group_Friend_Resource(ModelResource):
 class Expense_Resource(ModelResource):
     group = fields.ForeignKey(Group_Resource, attribute='group', null=True)
     payer = fields.ForeignKey(Group_Friend_Resource, attribute='payer', null=True)
-    #splitters = fields.ToManyField(Group_Friend_Resource, attribute='splitters', null=True, readonly = True)
+    splitters = fields.ToManyField(Group_Friend_Resource, attribute='splitters', null=True, readonly = True)
 
     class Meta:
         queryset = Expense.objects.all()
