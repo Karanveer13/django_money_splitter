@@ -270,6 +270,7 @@ class Expense_Resource(ModelResource):
         max_limit = None
         allowed_methods = ['get', 'post', 'put','delete']
         excludes = ['created_at']
+        always_return_data = True
         authentication = ApiKeyAuthentication()
         #authorization = Authorization()
         authorization = Expense_Authorization()
@@ -293,6 +294,7 @@ class Expense_Resource(ModelResource):
 class Expense_Splitter_Resource(ModelResource):
     expense = fields.ForeignKey(Expense_Resource, attribute='expense', null=True)
     e_splitter = fields.ForeignKey(Group_Friend_Resource, attribute='e_splitter', null=True)
+
     class Meta:
         queryset = Expense_Splitter.objects.all()
         resource_name = 'expense_splitter'
