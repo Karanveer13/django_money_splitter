@@ -262,6 +262,8 @@ class Group_Friend_Resource(ModelResource):
 class Expense_Resource(ModelResource):
     group = fields.ForeignKey(Group_Resource, attribute='group', null=True)
     payer = fields.ForeignKey(Group_Friend_Resource, attribute='payer', null=True)
+    #settled_by = models.ManyToManyField(Group_Friend, related_name="Expense_settled_splitters")
+    settled_by = fields.ToManyField(Group_Friend_Resource, attribute='settled_by', null=True, readonly=True, full=True)
     splitters = fields.ToManyField(Group_Friend_Resource, attribute='splitters', null=True, readonly = True, full=True)
 
     class Meta:
