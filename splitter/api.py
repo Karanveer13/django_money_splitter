@@ -299,6 +299,7 @@ class Expense_Splitter_Resource(ModelResource):
         queryset = Expense_Splitter.objects.all()
         resource_name = 'expense_splitter'
         max_limit = None
+        fields = ['owes', 'settle']
         allowed_methods = ['get', 'post', 'put','delete']
         authentication = ApiKeyAuthentication()
         #authorization = Authorization()
