@@ -271,7 +271,7 @@ class Expense_Resource(ModelResource):
         resource_name = 'expense'
         max_limit = None
         allowed_methods = ['get', 'post', 'put','delete']
-        excludes = ['created_at']
+        #excludes = ['created_at']
         always_return_data = True
         authentication = ApiKeyAuthentication()
         #authorization = Authorization()
