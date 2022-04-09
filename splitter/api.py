@@ -265,7 +265,7 @@ class Expense_Resource(ModelResource):
     payer = fields.ForeignKey(Group_Friend_Resource, attribute='payer', null=True)
     #settled_by = models.ManyToManyField(Group_Friend, related_name="Expense_settled_splitters")
     settled_by = fields.ToManyField(Group_Friend_Resource, attribute='settled_by', null=True, blank=True)
-    splitters = fields.ToManyField("Expense_Splitter_Resource", attribute='splitters', null=True, readonly = True, full=True)
+    splitters = fields.ToManyField("splitter.api.Expense_Splitter_Resource", attribute='splitters', null=True, readonly = True, full=True)
 
     class Meta:
         queryset = Expense.objects.all()
