@@ -54,8 +54,8 @@ class Expense(models.Model):
         return self.reason + ' in group ' + self.group.name
 
 class Expense_Splitter(models.Model):
-    expense = models.ForeignKey(Expense, on_delete = models.CASCADE, related_name = "Expense_name")
-    e_splitter = models.ForeignKey(Group_Friend, on_delete=models.CASCADE, related_name="Expense_Group_Friend")
+    expense = models.ForeignKey(Expense, null=True, on_delete = models.CASCADE, related_name = "Expense_name")
+    e_splitter = models.ForeignKey(Group_Friend, null=True, on_delete=models.CASCADE, related_name="Expense_Group_Friend")
     owes = models.IntegerField(null=True)
     settle = models.BooleanField(default=False)
 
