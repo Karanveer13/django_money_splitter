@@ -297,6 +297,8 @@ class Expense_Resource(ModelResource):
 class Expense_Splitter_Resource(ModelResource):
     expense = fields.ForeignKey(Expense_Resource, attribute='expense', null=True)
     e_splitter = fields.ForeignKey(Group_Friend_Resource, attribute='e_splitter', null=True)
+    owes = fields.IntegerField(null=True)
+    #age = fields.IntegerField(attribute='years_old', null=True)
 
     class Meta:
         queryset = Expense_Splitter.objects.all()
