@@ -56,7 +56,7 @@ class Expense(models.Model):
 class Expense_Splitter(models.Model):
     expense = models.ForeignKey(Expense, on_delete = models.CASCADE, related_name = "Expense_name")
     e_splitter = models.ForeignKey(Group_Friend, on_delete=models.CASCADE, related_name="Expense_Group_Friend")
-    owes = models.IntegerField()
+    owes = models.IntegerField(null=True)
     settle = models.BooleanField(default=False)
 
     def __str__(self):
