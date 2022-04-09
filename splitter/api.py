@@ -21,10 +21,11 @@ from django.db.models.query import QuerySet
 #from django.urls import path
 
 class User_Resource(ModelResource):
+    full_name=fields.CharField(attribute="get_full_name")
     class Meta:
         queryset = User.objects.all()
         resource_name = 'user'
-        fields = ['username']
+        fields = ['username','email']
         max_limit = None
         allowed_methods = ['get']
         authentication = ApiKeyAuthentication()
