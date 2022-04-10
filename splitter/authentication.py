@@ -38,19 +38,14 @@ class New_Resource(ModelResource):
         email = data.get('email')
         first_name = data.get('first_name')
         last_name = data.get('last_name')
-        print(type(username))
-        print(username)
-        print(password)
-        print(email)
-        print(first_name)
-        print(last_name)
+
         if username is None:
             raise BadRequest('Enter the username')
         if password is None:
             raise BadRequest('Enter the password')
 
         try:
-            user = User.objects.create_user(username, email=email, password=password)
+            user = User.objects.create_user(username, email, password)
             user.first_name = first_name
             user.last_name = last_name
             user.save()
@@ -63,6 +58,7 @@ class New_Resource(ModelResource):
                     'id': user.id,
                     'first name': first_name,
                     'last name': last_name,
+                    'email': email,
                     'token': api_key.key
             })
         except IntegrityError:
