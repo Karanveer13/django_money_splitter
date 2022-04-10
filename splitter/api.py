@@ -265,7 +265,8 @@ class Expense_Resource(ModelResource):
     payer = fields.ForeignKey(Group_Friend_Resource, attribute='payer', null=True)
     #settled_by = models.ManyToManyField(Group_Friend, related_name="Expense_settled_splitters")
     settled_by = fields.ToManyField(Group_Friend_Resource, attribute='settled_by', null=True, blank=True)
-    splitters = fields.ToManyField("splitter.api.Expense_Splitter_Resource", attribute='splitters', null=True, readonly = True, full=True)
+    splitters = fields.ToManyField(Group_Friend_Resource, attribute='splitters', null=True, readonly = True, full=True)
+    #splitters = fields.ToManyField('splitter.api.Expense_Splitter_Resource', attribute='splitters', null=True, readonly=True, full=True)
 
     class Meta:
         queryset = Expense.objects.all()
@@ -297,14 +298,16 @@ class Expense_Resource(ModelResource):
 class Expense_Splitter_Resource(ModelResource):
     expense = fields.ForeignKey(Expense_Resource, attribute='expense', null=True)
     e_splitter = fields.ForeignKey(Group_Friend_Resource, attribute='e_splitter', null=True)
-    owes = fields.IntegerField(null=True)
+    #owes = fields.IntegerField()
+    #owes = fields.IntegerField('owes', readonly=True, null=True)
+    #owes = fields.IntegerField(attribute='owes')
     #age = fields.IntegerField(attribute='years_old', null=True)
 
     class Meta:
         queryset = Expense_Splitter.objects.all()
         resource_name = 'expense_splitter'
         max_limit = None
-        fields = ['owes', 'settle']
+        #fields = ['owes', 'settle']
         allowed_methods = ['get', 'post', 'put','delete']
         authentication = ApiKeyAuthentication()
         #authorization = Authorization()
