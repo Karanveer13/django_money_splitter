@@ -65,7 +65,7 @@ class Expense_Splitter(models.Model):
     # settle = models.BooleanField(default=False)
 
     def __str__(self):
-        return  self.e_splitter.friend.p_friend.username +' in expense ' + self.expense.reason + ' owes ' + str(self.owes)
+        return  self.e_splitter.friend.user.username +' in expense ' + self.expense.reason + ' owes ' + str(self.owes)
 
     class Meta:
         unique_together = ('expense','e_splitter')
