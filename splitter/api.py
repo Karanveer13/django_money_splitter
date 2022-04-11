@@ -118,7 +118,7 @@ class Profile_Resource(ModelResource):
 
 class Profile_Friend_Resource(ModelResource):
     profile = fields.ForeignKey(Profile_Resource, attribute='profile', null=True)
-    p_friend = fields.ForeignKey(User_Resource, attribute='p_friend', null=True, full=True)
+    user = fields.ForeignKey(User_Resource, attribute='user', null=True, full=True)
 
     class Meta:
         queryset = Profile_Friend.objects.all()
@@ -131,7 +131,7 @@ class Profile_Friend_Resource(ModelResource):
         always_return_data = True
         filtering = {
             'profile': ALL_WITH_RELATIONS,
-            'p_friend': ALL_WITH_RELATIONS,
+            'user': ALL_WITH_RELATIONS,
         }
 
     def delete_detail(self, request, **kwargs):
@@ -264,9 +264,7 @@ class Group_Friend_Resource(ModelResource):
 class Expense_Resource(ModelResource):
     group = fields.ForeignKey(Group_Resource, attribute='group', null=True)
     payer = fields.ForeignKey(Group_Friend_Resource, attribute='payer', null=True)
-    #settled_by = models.ManyToManyField(Group_Friend, related_name="Expense_settled_splitters")
     settled_by = fields.ToManyField(Group_Friend_Resource, attribute='settled_by', null=True, blank=True)
-    #splitters = fields.ToManyField(Group_Friend_Resource, attribute='splitters', null=True, readonly = True, full=True)
     splitters = fields.ToManyField('splitter.api.Expense_Splitter_Resource', attribute=lambda bundle: bundle.obj.splitters.through.objects.filter(expense=bundle.obj ) or bundle.obj.splitters , null=True, readonly=True, full=True)
     #splitters = fields.ToManyField('splitter.api.Expense_Splitter_Resource', attribute='splitters', null=True, readonly=True, full=True)
 

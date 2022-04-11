@@ -13,13 +13,13 @@ class Profile(models.Model):
 
 class Profile_Friend(models.Model):
     profile = models.ForeignKey(Profile, on_delete = models.CASCADE, related_name = "Profile_user")
-    p_friend = models.ForeignKey(User, on_delete=models.CASCADE, related_name="Profile_Friend")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="Profile_Friend")
 
     def __str__(self):
-        return self.p_friend.username + ' is friend of ' + self.profile.profile_user.username
+        return self.user.username + ' is friend of ' + self.profile.profile_user.username
 
     class Meta:
-        unique_together = ('profile','p_friend')
+        unique_together = ('profile','user')
 
 class Group(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="Creator")
