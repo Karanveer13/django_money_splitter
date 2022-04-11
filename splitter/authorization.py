@@ -6,61 +6,61 @@ import pickle
 from itertools import chain
 
 class Profile_Authorization(Authorization):
-    def read_list(self, object_list, bundle):
-        #return object_list.filter(Q(profile_user__id=bundle.request.user)).distinct()
-        return object_list.filter(Q(profile_user=bundle.request.user)).distinct()
-
-    def read_detail(self, object_list, bundle):
-        if object_list.filter(Q(profile_user=bundle.request.user)).distinct():
-            return True
-        else:
-            return False
-
-    def update_list(self, object_list, bundle):
-        return object_list.filter(Q(profile_user=bundle.request.user)).distinct()
-
-    def update_detail(self, object_list, bundle):
-        if object_list.filter(Q(profile_user=bundle.request.user)).distinct():
-            return True
-        else:
-            return False
-
-    def delete_list(self, object_list, bundle):
-        return object_list.filter(Q(profile_user=bundle.request.user)).distinct()
-
-    def delete_detail(self, object_list, bundle):
-        if object_list.filter(Q(profile_user=bundle.request.user)).distinct():
-            return True
-        else:
-            return False
-    #pass
     # def read_list(self, object_list, bundle):
     #     #return object_list.filter(Q(profile_user__id=bundle.request.user)).distinct()
-    #     return object_list.filter(Q(profile_user=bundle.request.user) | Q(profile_friends__id=bundle.request.user.id)).distinct()
+    #     return object_list.filter(Q(profile_user=bundle.request.user)).distinct()
     #
     # def read_detail(self, object_list, bundle):
-    #     if object_list.filter(Q(profile_user=bundle.request.user) | Q(profile_friends__id=bundle.request.user.id)).distinct():
+    #     if object_list.filter(Q(profile_user=bundle.request.user)).distinct():
     #         return True
     #     else:
     #         return False
     #
     # def update_list(self, object_list, bundle):
-    #     return object_list.filter(Q(profile_user=bundle.request.user) | Q(profile_friends__id=bundle.request.user.id)).distinct()
+    #     return object_list.filter(Q(profile_user=bundle.request.user)).distinct()
     #
     # def update_detail(self, object_list, bundle):
-    #     if object_list.filter(Q(profile_user=bundle.request.user) | Q(profile_friends__id=bundle.request.user.id)).distinct():
+    #     if object_list.filter(Q(profile_user=bundle.request.user)).distinct():
     #         return True
     #     else:
     #         return False
     #
     # def delete_list(self, object_list, bundle):
-    #     return object_list.filter(Q(profile_user=bundle.request.user) | Q(profile_friends__id=bundle.request.user.id)).distinct()
+    #     return object_list.filter(Q(profile_user=bundle.request.user)).distinct()
     #
     # def delete_detail(self, object_list, bundle):
-    #     if object_list.filter(Q(profile_user=bundle.request.user) | Q(profile_friends__id=bundle.request.user.id)).distinct():
+    #     if object_list.filter(Q(profile_user=bundle.request.user)).distinct():
     #         return True
     #     else:
     #         return False
+    #pass
+    def read_list(self, object_list, bundle):
+        #return object_list.filter(Q(profile_user__id=bundle.request.user)).distinct()
+        return object_list.filter(Q(profile_user=bundle.request.user) | Q(profile_friends__id=bundle.request.user.id)).distinct()
+
+    def read_detail(self, object_list, bundle):
+        if object_list.filter(Q(profile_user=bundle.request.user) | Q(profile_friends__id=bundle.request.user.id)).distinct():
+            return True
+        else:
+            return False
+
+    def update_list(self, object_list, bundle):
+        return object_list.filter(Q(profile_user=bundle.request.user) | Q(profile_friends__id=bundle.request.user.id)).distinct()
+
+    def update_detail(self, object_list, bundle):
+        if object_list.filter(Q(profile_user=bundle.request.user) | Q(profile_friends__id=bundle.request.user.id)).distinct():
+            return True
+        else:
+            return False
+
+    def delete_list(self, object_list, bundle):
+        return object_list.filter(Q(profile_user=bundle.request.user) | Q(profile_friends__id=bundle.request.user.id)).distinct()
+
+    def delete_detail(self, object_list, bundle):
+        if object_list.filter(Q(profile_user=bundle.request.user) | Q(profile_friends__id=bundle.request.user.id)).distinct():
+            return True
+        else:
+            return False
 
 
 
