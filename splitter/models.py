@@ -36,7 +36,7 @@ class Group_Friend(models.Model):
 
 
     def __str__(self):
-        return  self.friend.p_friend.username +' in group ' + self.group.name
+        return  self.friend.user.username +' in group ' + self.group.name
 
     class Meta:
         unique_together = ('group','friend')
