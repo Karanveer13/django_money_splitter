@@ -91,6 +91,7 @@ class New_Resource(ModelResource):
                     'success': True,
                     'username': username,
                     'id': user.id,
+                    'full_name': user.first_name + " " + user.last_name,
                     'token': api_key.key
             })
         else:
