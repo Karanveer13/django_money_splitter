@@ -263,7 +263,7 @@ class Group_Friend_Resource(ModelResource):
 
 class Expense_Resource(ModelResource):
     group = fields.ForeignKey(Group_Resource, attribute='group', null=True)
-    payer = fields.ForeignKey(Group_Friend_Resource, attribute='payer', null=True)
+    payer = fields.ForeignKey(Group_Friend_Resource, attribute='payer', null=True, full=True)
     settled_by = fields.ToManyField(Group_Friend_Resource, attribute='settled_by', null=True, blank=True)
     splitters = fields.ToManyField('splitter.api.Expense_Splitter_Resource', attribute=lambda bundle: bundle.obj.splitters.through.objects.filter(expense=bundle.obj ) or bundle.obj.splitters , null=True, readonly=True, full=True)
     #splitters = fields.ToManyField('splitter.api.Expense_Splitter_Resource', attribute='splitters', null=True, readonly=True, full=True)
