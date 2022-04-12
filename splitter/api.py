@@ -298,7 +298,7 @@ class Expense_Resource(ModelResource):
 
 class Expense_Splitter_Resource(ModelResource):
     expense = fields.ForeignKey(Expense_Resource, attribute='expense', null=True)
-    e_splitter = fields.ForeignKey(Group_Friend_Resource, attribute='e_splitter', null=True)
+    e_splitter = fields.ForeignKey(Group_Friend_Resource, attribute='e_splitter', null=True, full=True)
     #owes = fields.IntegerField(null=True)
 
     class Meta:
