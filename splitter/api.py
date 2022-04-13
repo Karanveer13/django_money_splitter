@@ -36,62 +36,6 @@ class User_Resource(ModelResource):
             "username":('exact', 'startswith', 'contains','in')
         }
 
-    # def apply_filters(self, request, applicable_filters):
-    #     #     """
-    #     #     An ORM-specific implementation of ``apply_filters``.
-    #     #
-    #     #     The default simply applies the ``applicable_filters`` as ``**kwargs``,
-    #     #     but should make it possible to do more advanced things.
-    #     """
-    #     positive_filters = {}
-    #     negative_filters = {}
-    #     for lookup in applicable_filters.keys():
-    #         if lookup.endswith('__not_eq'):
-    #             negative_filters[lookup] = applicable_filters[lookup]
-    #         else:
-    #             positive_filters[lookup] = applicable_filters[lookup]
-    #     print(positive_filters)
-    #     print(negative_filters)
-    #     return self.get_object_list(request).filter(**positive_filters).exclude(**negative_filters)
-
-
-    # def apply_filters(self, request, applicable_filters):
-    #     """
-    #     A hook to alter how the filters are applied to the object list.
-    #
-    #     This needs to be implemented at the user level.
-    #
-    #     ``ModelResource`` includes a full working version specific to Django's
-    #     ``Models``.
-    #     """
-    #     positive_filters = {}
-    #     negative_filters = {}
-    #     print("Hi there")
-    #     for lookup in applicable_filters.keys():
-    #         print (lookup)
-    #         print (applicable_filters.keys())
-    #         if lookup.endswith('__not_eq'):
-    #             negative_filters[lookup] = applicable_filters[lookup]
-    #         else:
-    #             positive_filters[lookup] = applicable_filters[lookup]
-    #     for key in applicable_filters.keys():
-    #         value = applicable_filters[key]
-    #         if value[0:7] == 'exclude':
-    #             negative_filters["pk"] = value[8:]
-    #     print ("Outside loop")
-    #     print (positive_filters)
-    #     print (negative_filters)
-    #     print ("Bye Bye")
-    #     print (self.get_object_list(request))
-    #     newVar = []
-    #     for item in self.get_object_list(request):
-    #         print (item)
-    #         print(type(item))
-    #         if applicable_filters["pk"].x != item:
-    #             newVar.append(item)
-    #     return newVar
-    #     # return self.get_object_list(request).exclude(User.username == "Karanveer")
-    #         # .filter(**positive_filters).exclude(**negative_filters)
 
 class Profile_Resource(ModelResource):
     profile_user = fields.ForeignKey(User_Resource, attribute='profile_user', null=True)
@@ -149,6 +93,7 @@ class Profile_Friend_Resource(ModelResource):
 class Group_Resource(ModelResource):
     creator = fields.ForeignKey(User_Resource, attribute = 'creator', null = True)
     group_friends = fields.ToManyField(Profile_Friend_Resource, attribute = 'group_friends', null = True, readonly = True, full=True)
+    #group_friends = fields.ToManyField('splitter.api.Group_Friend_Resource',attribute=lambda bundle: bundle.obj.group_friends.through.objects.filter(group=bundle.obj) or bundle.obj.group_friends , null=True, readonly=True, full=True)
     #group_friends = fields.ToManyField(User_Resource, attribute='group_friends', null=True)
     class Meta:
         queryset = Group.objects.all()

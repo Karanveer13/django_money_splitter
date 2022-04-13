@@ -69,7 +69,6 @@ MIDDLEWARE = [
 #     'http://127.0.0.1:5500'
 # ]
 
-
 ROOT_URLCONF = 'money_splitter.urls'
 
 TEMPLATES = [
