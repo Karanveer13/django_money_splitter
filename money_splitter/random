@@ -1,0 +1,265 @@
+{
+	"info": {
+		"_postman_id": "0e05f36a-7e53-4dba-a872-3ed8efb8dc64",
+		"name": "Orgzit APIs Demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET Record",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://orgzitapidemo.orgzit.com/api/1/record/u5fcmem8h4/?use_field_slug=true",
+					"protocol": "https",
+					"host": [
+						"orgzitapidemo",
+						"orgzit",
+						"com"
+					],
+					"path": [
+						"api",
+						"1",
+						"record",
+						"u5fcmem8h4",
+						""
+					],
+					"query": [
+						{
+							"key": "use_field_slug",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Record (Edit)",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{
+    \"dataform\": \"/api/1/dataform/jhtxltf37l/\",
+    \"dataform_id\": \"jhtxltf37l\",
+    \"fields\": {
+        \"status\": \"00-New\"
+    },
+    \"use_field_slug\": true
+}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://orgzitapidemo.orgzit.com/api/1/record/u5fcmem8h4/",
+					"protocol": "https",
+					"host": [
+						"orgzitapidemo",
+						"orgzit",
+						"com"
+					],
+					"path": [
+						"api",
+						"1",
+						"record",
+						"u5fcmem8h4",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Record (Create)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{
+    \"dataform\": \"/api/1/dataform/jhtxltf37l/\",
+    \"dataform_id\": \"jhtxltf37l\",
+    \"fields\": {
+        \"task_name\": \"Test task\",
+        \"priority\": \"01-High\",
+        \"status\": \"00-New\",
+        \"notes\": \"Created from API\"
+    },
+    \"use_field_slug\": true
+}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://orgzitapidemo.orgzit.com/api/1/record/",
+					"protocol": "https",
+					"host": [
+						"orgzitapidemo",
+						"orgzit",
+						"com"
+					],
+					"path": [
+						"api",
+						"1",
+						"record",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch records 1 - basic records fetch",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{
+  \"dataform\": \"jhtxltf37l\",
+  \"filters\": null,
+  \"getfieldvalues\": false,
+  \"use_field_slug\": true
+}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://orgzitapidemo.orgzit.com/api/1/record/filter/?limit=20",
+					"protocol": "https",
+					"host": [
+						"orgzitapidemo",
+						"orgzit",
+						"com"
+					],
+					"path": [
+						"api",
+						"1",
+						"record",
+						"filter",
+						""
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch records 2 - pagination with offset",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{
+  \"dataform\": \"jhtxltf37l\",
+  \"filters\": null,
+  \"getfieldvalues\": false,
+  \"use_field_slug\": true
+}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://orgzitapidemo.orgzit.com/api/1/record/filter/?limit=20&offset=0",
+					"protocol": "https",
+					"host": [
+						"orgzitapidemo",
+						"orgzit",
+						"com"
+					],
+					"path": [
+						"api",
+						"1",
+						"record",
+						"filter",
+						""
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "20"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch records 3 - Filtering",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{
+  \"dataform\": \"jhtxltf37l\",
+  \"filters\": [
+    {
+      \"field\": \"status\",
+      \"op\": \"contains\",
+      \"values\": [
+        \"new\"
+      ]
+    }
+  ],
+  \"getfieldvalues\": false,
+  \"use_field_slug\": true
+}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://orgzitapidemo.orgzit.com/api/1/record/filter/?limit=20",
+					"protocol": "https",
+					"host": [
+						"orgzitapidemo",
+						"orgzit",
+						"com"
+					],
+					"path": [
+						"api",
+						"1",
+						"record",
+						"filter",
+						""
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
