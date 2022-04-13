@@ -39,14 +39,15 @@ class New_Resource(ModelResource):
         first_name = data.get('first_name')
         last_name = data.get('last_name')
         username_exist = User.objects.filter(username=username)
+        print(username_exist)
         email_exist = User.objects.filter(email=email)
         if username is None:
             raise BadRequest('Enter the username')
         if password is None:
             raise BadRequest('Enter the password')
-        if username_exist is not None:
+        if username_exist:
             raise BadRequest('Username already exists!!')
-        if email_exist is not None:
+        if email_exist:
             raise BadRequest('Email already exists!!')
 
         try:
