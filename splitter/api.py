@@ -63,7 +63,7 @@ class Profile_Resource(ModelResource):
 
 class Profile_Friend_Resource(ModelResource):
     profile = fields.ForeignKey(Profile_Resource, attribute='profile', null=True)
-    user_friend = fields.ForeignKey(User_Resource, attribute='user_friend', null=True, full=True)
+    user = fields.ForeignKey(User_Resource, attribute='user', null=True, full=True)
 
     # group_friends = fields.ToManyField('splitter.api.Group_Friend_Resource',attribute=lambda bundle: bundle.obj.group_friends.through.objects.filter(group=bundle.obj) or bundle.obj.group_friends , null=True, readonly=True, full=True)
     class Meta:
@@ -77,7 +77,7 @@ class Profile_Friend_Resource(ModelResource):
         always_return_data = True
         filtering = {
             'profile': ALL_WITH_RELATIONS,
-            'user_friend': ALL_WITH_RELATIONS,
+            'user': ALL_WITH_RELATIONS,
         }
 
     def delete_detail(self, request, **kwargs):
