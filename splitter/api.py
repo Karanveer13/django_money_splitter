@@ -62,8 +62,7 @@ class Profile_Resource(ModelResource):
 
 class Profile_Friend_Resource(ModelResource):
     profile = fields.ForeignKey(Profile_Resource, attribute='profile', null=True)
-    user = fields.ForeignKey(User_Resource, attribute='user', null=True, full=True)
-
+    user_friend = fields.ForeignKey(User_Resource, attribute='user_friend', null=True, full=True)
     class Meta:
         queryset = Profile_Friend.objects.all()
         resource_name = 'profile_friend'

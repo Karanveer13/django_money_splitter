@@ -13,13 +13,13 @@ class Profile(models.Model):
 
 class Profile_Friend(models.Model):
     profile = models.ForeignKey(Profile, on_delete = models.CASCADE, related_name = "Profile_user")
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="Profile_Friend")
+    user_friend = models.ForeignKey(User, on_delete=models.CASCADE, related_name="Profile_Friend")
 
     def __str__(self):
-        return self.user.username + ' is friend of ' + self.profile.profile_user.username
+        return self.user_friend.username + ' is friend of ' + self.profile.profile_user.username
 
     class Meta:
-        unique_together = ('profile','user')
+        unique_together = ('profile','user_friend')
 
 class Group(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name="Creator")
@@ -36,7 +36,7 @@ class Group_Friend(models.Model):
 
 
     def __str__(self):
-        return  self.friend.user.username +' in group ' + self.group.name
+        return  self.friend.user_friend.username +' in group ' + self.group.name
 
     class Meta:
         unique_together = ('group','friend')
@@ -65,7 +65,7 @@ class Expense_Splitter(models.Model):
     # settle = models.BooleanField(default=False)
 
     def __str__(self):
-        return  self.e_splitter.friend.user.username +' in expense ' + self.expense.reason + ' owes ' + str(self.owes)
+        return  self.e_splitter.friend.user_friend.username +' in expense ' + self.expense.reason + ' owes ' + str(self.owes)
 
     class Meta:
         unique_together = ('expense','e_splitter')
@@ -77,7 +77,7 @@ class Expense_Total(models.Model):
     final_amount = models.IntegerField()
 
     def __str__(self):
-        return self.sender.friend.p_friend.username + ' gives amount ' + str(self.final_amount) + ' to ' +self.receiver.friend.p_friend.username
+        return self.sender.friend.user_friend.username + ' gives amount ' + str(self.final_amount) + ' to ' +self.receiver.friend.user_friend.username
 
 
 class Settle(models.Model):
@@ -88,4 +88,4 @@ class Settle(models.Model):
     amount = models.IntegerField()
 
     def __str__(self):
-        return self.sender.friend.p_friend.username + ' has to pay ' + self.receiver.friend.p_friend.username + ' in group ' + self.group.name
+        return self.sender.friend.user_friend.username + ' has to pay ' + self.receiver.friend.user_friend.username + ' in group ' + self.group.name

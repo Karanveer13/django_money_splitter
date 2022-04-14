@@ -66,28 +66,28 @@ class Profile_Authorization(Authorization):
 
 class Profile_Friend_Authorization(Authorization):
     def read_list(self, object_list, bundle):
-        return object_list.filter(Q(profile__profile_user=bundle.request.user) | Q(user__user__id=bundle.request.user.id)).distinct()
+        return object_list.filter(Q(profile__profile_user=bundle.request.user) | Q(user_friend__id=bundle.request.user.id)).distinct()
 
     def read_detail(self, object_list, bundle):
-        if object_list.filter(Q(profile__profile_user=bundle.request.user) | Q(user__user__id=bundle.request.user.id)).distinct():
+        if object_list.filter(Q(profile__profile_user=bundle.request.user) | Q(user_friend__id=bundle.request.user.id)).distinct():
             return True
         else:
             return False
 
     def update_list(self, object_list, bundle):
-        return object_list.filter(Q(profile__profile_user=bundle.request.user) | Q(user__user__id=bundle.request.user.id)).distinct()
+        return object_list.filter(Q(profile__profile_user=bundle.request.user) | Q(user_friend__id=bundle.request.user.id)).distinct()
 
     def update_detail(self, object_list, bundle):
-        if object_list.filter(Q(profile__profile_user=bundle.request.user) | Q(user__user__id=bundle.request.user.id)).distinct():
+        if object_list.filter(Q(profile__profile_user=bundle.request.user) | Q(user_friend__id=bundle.request.user.id)).distinct():
             return True
         else:
             return False
 
     def delete_list(self, object_list, bundle):
-        return object_list.filter(Q(profile__profile_user=bundle.request.user) | Q(user__user__id=bundle.request.user.id)).distinct()
+        return object_list.filter(Q(profile__profile_user=bundle.request.user) | Q(user_friend__id=bundle.request.user.id)).distinct()
 
     def delete_detail(self, object_list, bundle):
-        if object_list.filter(Q(profile__profile_user=bundle.request.user) | Q(user__user__id=bundle.request.user.id)).distinct():
+        if object_list.filter(Q(profile__profile_user=bundle.request.user) | Q(user_friend__id=bundle.request.user.id)).distinct():
             return True
         else:
             return False
