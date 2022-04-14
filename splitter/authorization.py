@@ -161,28 +161,28 @@ class Group_Friend_Authorization(Authorization):
 
 class Expense_Authorization(Authorization):
     def read_list(self, object_list, bundle):
-        return object_list.filter(Q(group__creator__id=bundle.request.user.id) | Q(payer__id=bundle.request.user.id) | Q(splitters__friend__user__id=bundle.request.user.id)).distinct()
+        return object_list.filter(Q(group__creator__id=bundle.request.user.id) | Q(payer__id=bundle.request.user.id) | Q(splitters__friend__user__id=bundle.request.user.id) | Q(settled_by__friend__user__id=bundle.request.user.id)).distinct()
 
     def read_detail(self, object_list, bundle):
-        if object_list.filter(Q(group__creator__id=bundle.request.user.id) | Q(payer__id=bundle.request.user.id) | Q(splitters__friend__user__id=bundle.request.user.id)).distinct():
+        if object_list.filter(Q(group__creator__id=bundle.request.user.id) | Q(payer__id=bundle.request.user.id) | Q(splitters__friend__user__id=bundle.request.user.id) | Q(settled_by__friend__user__id=bundle.request.user.id)).distinct():
             return True
         else:
             return False
 
     def update_list(self, object_list, bundle):
-        return object_list.filter(Q(group__creator__id=bundle.request.user.id) | Q(payer__id=bundle.request.user.id) | Q(splitters__friend__user__id=bundle.request.user.id)).distinct()
+        return object_list.filter(Q(group__creator__id=bundle.request.user.id) | Q(payer__id=bundle.request.user.id) | Q(splitters__friend__user__id=bundle.request.user.id) | Q(settled_by__friend__user__id=bundle.request.user.id)).distinct()
 
     def update_detail(self, object_list, bundle):
-        if object_list.filter(Q(group__creator__id=bundle.request.user.id) | Q(payer__id=bundle.request.user.id) | Q(splitters__friend__user__id=bundle.request.user.id)).distinct():
+        if object_list.filter(Q(group__creator__id=bundle.request.user.id) | Q(payer__id=bundle.request.user.id) | Q(splitters__friend__user__id=bundle.request.user.id) | Q(settled_by__friend__user__id=bundle.request.user.id)).distinct():
             return True
         else:
             return False
 
     def delete_list(self, object_list, bundle):
-        return object_list.filter(Q(group__creator__id=bundle.request.user.id) | Q(payer__id=bundle.request.user.id) | Q(splitters__friend__user__id=bundle.request.user.id)).distinct()
+        return object_list.filter(Q(group__creator__id=bundle.request.user.id) | Q(payer__id=bundle.request.user.id) | Q(splitters__friend__user__id=bundle.request.user.id) | Q(settled_by__friend__user__id=bundle.request.user.id)).distinct()
 
     def delete_detail(self, object_list, bundle):
-        if object_list.filter(Q(group__creator__id=bundle.request.user.id) | Q(payer__id=bundle.request.user.id) | Q(splitters__friend__user__id=bundle.request.user.id)).distinct():
+        if object_list.filter(Q(group__creator__id=bundle.request.user.id) | Q(payer__id=bundle.request.user.id) | Q(splitters__friend__user__id=bundle.request.user.id) | Q(settled_by__friend__user__id=bundle.request.user.id)).distinct():
             return True
         else:
             return False
